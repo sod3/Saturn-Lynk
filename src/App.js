@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Mail, MapPin, ChevronRight, Check, MessageCircle, Send, ArrowRight, Star, Zap, Shield, Clock, Award, Users, TrendingUp, Globe } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X, Phone, Mail, MapPin, ChevronRight, MessageCircle, Send, ArrowRight, Star, Zap, Shield, Clock, Award, Users, TrendingUp, Globe } from 'lucide-react';
 
 const SaturnLynkWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
