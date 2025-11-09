@@ -666,9 +666,15 @@ const SaturnLynkWebsite = () => {
               2024 Saturn Lynk. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-[#009FE3] transition-colors">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-[#009FE3] transition-colors">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-[#009FE3] transition-colors">Cookie Policy</a>
+              <button className="text-gray-400 hover:text-[#009FE3] transition-colors focus:outline-none">
+                Privacy Policy
+              </button>
+              <button className="text-gray-400 hover:text-[#009FE3] transition-colors focus:outline-none">
+                Terms of Service
+              </button>
+              <button className="text-gray-400 hover:text-[#009FE3] transition-colors focus:outline-none">
+                Cookie Policy
+              </button>
             </div>
           </div>
         </div>
