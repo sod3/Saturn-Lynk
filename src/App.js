@@ -81,6 +81,14 @@ const SaturnLynkWebsite = () => {
     setShowQuoteForm(false);
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
       <style>{`
@@ -171,10 +179,16 @@ const SaturnLynkWebsite = () => {
             <div className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
               <p className="text-sm text-gray-700 mb-3">Quick options:</p>
               <div className="space-y-2">
-                <button className="w-full text-left text-sm bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-xl hover:from-[#009FE3] hover:to-cyan-400 hover:text-white transition-all duration-300 font-medium border border-blue-100">
+                <button 
+                  onClick={() => setShowQuoteForm(true)}
+                  className="w-full text-left text-sm bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-xl hover:from-[#009FE3] hover:to-cyan-400 hover:text-white transition-all duration-300 font-medium border border-blue-100"
+                >
                   Request a Quote
                 </button>
-                <button className="w-full text-left text-sm bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-xl hover:from-[#009FE3] hover:to-cyan-400 hover:text-white transition-all duration-300 font-medium border border-blue-100">
+                <button 
+                  onClick={() => scrollToSection('services')}
+                  className="w-full text-left text-sm bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-xl hover:from-[#009FE3] hover:to-cyan-400 hover:text-white transition-all duration-300 font-medium border border-blue-100"
+                >
                   View Our Services
                 </button>
                 <button className="w-full text-left text-sm bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-xl hover:from-[#009FE3] hover:to-cyan-400 hover:text-white transition-all duration-300 font-medium border border-blue-100">
@@ -200,24 +214,27 @@ const SaturnLynkWebsite = () => {
       <header className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl shadow-xl' : 'bg-white/80 backdrop-blur-sm'}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center py-5">
-            <div className="flex items-center gap-3 group cursor-pointer">
+            <button 
+              onClick={() => scrollToSection('home')}
+              className="flex items-center gap-3 group cursor-pointer"
+            >
               <div className="w-12 h-12 bg-gradient-to-br from-[#009FE3] to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
                 <Globe className="w-6 h-6 text-white" />
               </div>
               <div className="text-2xl font-black bg-gradient-to-r from-[#009FE3] to-cyan-500 bg-clip-text text-transparent">
                 Saturn Lynk
               </div>
-            </div>
+            </button>
            
             <nav className="hidden lg:flex items-center space-x-1">
               {['Home', 'Services', 'About', 'Industries', 'Contact'].map((item) => (
-                <a
+                <button
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  onClick={() => scrollToSection(item.toLowerCase())}
                   className="px-5 py-2 text-gray-700 hover:text-[#009FE3] font-semibold transition-all rounded-xl hover:bg-blue-50"
                 >
                   {item}
-                </a>
+                </button>
               ))}
             </nav>
             <div className="hidden lg:flex items-center gap-3">
@@ -243,13 +260,13 @@ const SaturnLynkWebsite = () => {
           <div className="lg:hidden bg-white border-t animate-slideUp">
             <nav className="px-6 py-6 space-y-2">
               {['Home', 'Services', 'About', 'Industries', 'Contact'].map((item) => (
-                <a
+                <button
                   key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="block px-4 py-3 text-gray-700 hover:text-[#009FE3] hover:bg-blue-50 rounded-xl font-semibold transition-all"
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="block w-full text-left px-4 py-3 text-gray-700 hover:text-[#009FE3] hover:bg-blue-50 rounded-xl font-semibold transition-all"
                 >
                   {item}
-                </a>
+                </button>
               ))}
               <button
                 onClick={() => setShowQuoteForm(true)}
@@ -293,12 +310,12 @@ const SaturnLynkWebsite = () => {
                   Request a Quote
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <a
-                  href="#services"
+                <button
+                  onClick={() => scrollToSection('services')}
                   className="px-8 py-4 bg-white text-gray-800 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all border-2 border-gray-200 hover:border-[#009FE3] flex items-center justify-center gap-2"
                 >
                   Explore Services
-                </a>
+                </button>
               </div>
              
               <div className="grid grid-cols-3 gap-6 mt-12">
@@ -373,7 +390,10 @@ const SaturnLynkWebsite = () => {
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                <button className="flex items-center gap-2 text-[#009FE3] font-bold group-hover:gap-4 transition-all">
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center gap-2 text-[#009FE3] font-bold group-hover:gap-4 transition-all"
+                >
                   Learn More
                   <ArrowRight className="w-5 h-5" />
                 </button>
@@ -544,10 +564,7 @@ const SaturnLynkWebsite = () => {
               Get Free Consultation
               <ArrowRight className="w-5 h-5" />
             </button>
-            <a
-              href="tel:+966XXXXXXXXX"
-              className="px-10 py-5 bg-transparent border-3 border-white text-white rounded-2xl font-bold text-lg hover:bg-white hover:text-[#009FE3] transition-all duration-300 flex items-center justify-center gap-2"
-            >
+            <a>
               <Phone className="w-5 h-5" />
               Call Us Now
             </a>
@@ -607,13 +624,12 @@ const SaturnLynkWebsite = () => {
               </p>
               <div className="flex gap-3">
                 {['F', 'T', 'L', 'I'].map((social, idx) => (
-                  <a
+                  <button
                     key={idx}
-                    href="#"
                     className="w-10 h-10 bg-gray-800 hover:bg-gradient-to-br hover:from-[#009FE3] hover:to-cyan-400 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 text-sm font-bold"
                   >
                     {social}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -622,10 +638,13 @@ const SaturnLynkWebsite = () => {
               <ul className="space-y-3">
                 {['Home', 'Services', 'About Us', 'Industries', 'Contact'].map((link, idx) => (
                   <li key={idx}>
-                    <a href={`#${link.toLowerCase().replace(' ', '')}`} className="text-gray-400 hover:text-[#009FE3] transition-colors flex items-center gap-2">
+                    <button 
+                      onClick={() => scrollToSection(link.toLowerCase().replace(' ', ''))}
+                      className="text-gray-400 hover:text-[#009FE3] transition-colors flex items-center gap-2"
+                    >
                       <ChevronRight className="w-4 h-4" />
                       {link}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -635,10 +654,13 @@ const SaturnLynkWebsite = () => {
               <ul className="space-y-3">
                 {services.slice(0, 5).map((service, idx) => (
                   <li key={idx}>
-                    <a href="#services" className="text-gray-400 hover:text-[#009FE3] transition-colors flex items-center gap-2">
+                    <button 
+                      onClick={() => scrollToSection('services')}
+                      className="text-gray-400 hover:text-[#009FE3] transition-colors flex items-center gap-2"
+                    >
                       <ChevronRight className="w-4 h-4" />
                       {service.title}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
