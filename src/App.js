@@ -564,10 +564,8 @@ const SaturnLynkWebsite = () => {
               Get Free Consultation
               <ArrowRight className="w-5 h-5" />
             </button>
-            <a>
               <Phone className="w-5 h-5" />
               Call Us Now
-            </a>
           </div>
         </div>
       </section>
