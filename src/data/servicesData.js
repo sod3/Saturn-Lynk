@@ -42,7 +42,7 @@ export const services = [
     },
     icon: <Globe />, 
     gradient: "from-blue-400 to-cyan-300",
-    video: "/1030.mp4",
+    video: "/1.mp4",
     videoDescription: {
       en: "Watch how we design and implement robust network infrastructure solutions",
       ar: "شاهد كيف نقوم بتصميم وتنفيذ حلول البنية التحتية للشبكات القوية"

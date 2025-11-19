@@ -3,6 +3,7 @@ export const translations = {
     // Navbar
     nav: ['Home', 'Services', 'Why Us', 'Case Studies', 'Testimonials', 'Contact'],
     freeConsultation: 'Free Consultation',
+    clients: 'Our Clients', // Added clients key
 
     // Hero
     trustedBy: 'Trusted by Leading Saudi Enterprises',
@@ -54,7 +55,7 @@ export const translations = {
     getInTouch: 'Get in Touch',
     buildFuture: "Let's Build Your Future",
     contactDesc: 'Contact us for a free consultation or via WhatsApp.',
-    phone: '+966 XX XXX XXXX',
+    phone: '+966 55 125 4121',
     email: 'info@saturnlynk.sa',
     location: 'Riyadh, Saudi Arabia',
     chatWhatsApp: 'Chat on WhatsApp',
@@ -85,11 +86,27 @@ export const translations = {
     requestQuote: 'Request Quote',
     viewServices: 'View Services',
     chatOnWA: 'Chat on WhatsApp',
+
+    // Clients Page - New Translations
+    valuedClients: 'Our Valued Clients',
+    clientsSubtitle: 'Trusted by businesses worldwide. Discover what our clients have to say about their experience working with us.',
+    clientTestimonials: 'Client Testimonials',
+    trustedByLeaders: 'Trusted By Industry Leaders',
+    joinFamily: 'Ready to Join Our Family of Happy Clients?',
+    joinFamilyDesc: 'Let\'s create something amazing together. Get started with a free consultation today.',
+    startProjectToday: 'Start Your Project',
+    happyClients: 'Happy Clients',
+    satisfactionRate: 'Satisfaction Rate',
+    averageRating: 'Average Rating',
+    support: 'Support',
+    project: 'Project',
+    at: 'at',
   },
   ar: {
     // Navbar
     nav: ['الرئيسية', 'الخدمات', 'لماذا نحن', 'دراسات الحالة', 'آراء العملاء', 'تواصل معنا'],
     freeConsultation: 'استشارة مجانية',
+    clients: 'عملاؤنا', // Added clients key
 
     // Hero
     trustedBy: 'موثوق به من قبل الشركات السعودية الرائدة',
@@ -141,7 +158,7 @@ export const translations = {
     getInTouch: 'تواصل معنا',
     buildFuture: 'لنبني مستقبلك',
     contactDesc: 'تواصل معنا لاستشارة مجانية أو عبر واتساب.',
-    phone: '+966 XX XXX XXXX',
+    phone: '+966 55 125 4121',
     email: 'info@saturnlynk.sa',
     location: 'الرياض، المملكة العربية السعودية',
     chatWhatsApp: 'دردشة على واتساب',
@@ -172,5 +189,20 @@ export const translations = {
     requestQuote: 'طلب عرض أسعار',
     viewServices: 'عرض الخدمات',
     chatOnWA: 'الدردشة على واتساب',
+
+    // Clients Page - New Translations
+    valuedClients: 'عملاؤنا الكرام',
+    clientsSubtitle: 'موثوق به من قبل الشركات حول العالم. اكتشف ما يقوله عملاؤنا عن تجربتهم في العمل معنا.',
+    clientTestimonials: 'آراء العملاء',
+    trustedByLeaders: 'موثوق به من قبل قادة الصناعة',
+    joinFamily: 'مستعد للانضمام إلى عائلتنا من العملاء السعداء؟',
+    joinFamilyDesc: 'لنخلق شيئًا مذهلاً معًا. ابدأ باستشارة مجانية اليوم.',
+    startProjectToday: 'ابدأ مشروعك',
+    happyClients: 'عميل سعيد',
+    satisfactionRate: 'معدل الرضا',
+    averageRating: 'متوسط التقييم',
+    support: 'الدعم',
+    project: 'المشروع',
+    at: 'في',
   }
 };

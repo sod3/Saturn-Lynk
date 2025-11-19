@@ -29,7 +29,7 @@ export const Contact = ({ setShowQuoteForm, t, lang }) => (
             <span>{t('location')}</span>
           </div>
           <a 
-            href="https://wa.me/966XXXXXXXXX" 
+            href="https://wa.me/966551254121" 
             target="_blank" 
             rel="noopener noreferrer"
             className="block px-6 py-3 bg-green-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:shadow-md transition-all"

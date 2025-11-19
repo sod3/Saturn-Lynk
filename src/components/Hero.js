@@ -12,7 +12,7 @@ export const Hero = ({ setShowQuoteForm, scrollToSection, t, lang }) => (
         className="w-full h-full object-cover"
         style={{ opacity: 0.7 }} // Lower opacity for better text visibility
       >
-        <source src="/1030.mp4" type="video/mp4" />
+        <source src="/1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

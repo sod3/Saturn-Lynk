@@ -5,8 +5,8 @@ export const Footer = ({ scrollToSection, t, lang }) => (
     <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-300 rounded-lg flex items-center justify-center">
-            <Globe className="w-4 h-4 text-white" />
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-300 rounded-lg flex items-center justify-center">
+              <img className="w-15 h-15" src="/logo.webp" alt="Saturn Lynk Logo" />
           </div>
           <span className="text-lg font-bold text-white">Saturn Lynk</span>
         </div>

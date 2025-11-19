@@ -19,7 +19,7 @@ export const Chatbot = ({ showChatbot, setShowChatbot, setShowQuoteForm, scrollT
           <p className="text-gray-600">{t('howAssist')}</p>
           <button onClick={() => setShowQuoteForm(true)} className="w-full p-2 bg-blue-50 rounded-lg hover:bg-blue-100">{t('requestQuote')}</button>
           <button onClick={() => scrollToSection('services')} className="w-full p-2 bg-blue-50 rounded-lg hover:bg-blue-100">{t('viewServices')}</button>
-          <a href="https://wa.me/966XXXXXXXXX" className="w-full p-2 bg-green-50 rounded-lg hover:bg-green-100 block text-center">{t('chatOnWA')}</a>
+          <a href="https://wa.me/966551254121" className="w-full p-2 bg-green-50 rounded-lg hover:bg-green-100 block text-center">{t('chatOnWA')}</a>
         </div>
       </motion.div>
     )}
