@@ -1,3 +1,4 @@
+// src/components/Services.jsx
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { services } from "../data/servicesData";
@@ -6,8 +7,15 @@ import { useNavigate } from "react-router-dom";
 export const Services = ({ scrollToSection, t, lang }) => {
   const navigate = useNavigate();
 
+  // Show only first 6 services on homepage
+  const displayedServices = services.slice(0, 6);
+
   const handleLearnMore = (index) => {
     navigate(`/service/${index}`);
+  };
+
+  const handleShowAll = () => {
+    navigate("/all-services");
   };
 
   return (
@@ -28,13 +36,14 @@ export const Services = ({ scrollToSection, t, lang }) => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, idx) => (
+          {displayedServices.map((service, idx) => (
             <motion.div
               key={idx}
               className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 shadow-md hover:shadow-xl border border-blue-100/50 hover:border-blue-300 transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
               whileHover={{ scale: 1.03 }}
             >
               <div
@@ -58,6 +67,19 @@ export const Services = ({ scrollToSection, t, lang }) => {
             </motion.div>
           ))}
         </div>
+
+        {/* Show More Button - Only if there are more than 6 services */}
+        {services.length > 6 && (
+          <div className="text-center mt-12">
+            <button
+              onClick={handleShowAll}
+              className="inline-flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
+            >
+              {t("showAllServices") || "Show All Services"}
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

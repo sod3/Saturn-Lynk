@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Globe } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -24,31 +24,51 @@ export const Navbar = ({
     } else {
       scrollToSection("home");
     }
+    setIsMenuOpen(false);
   };
 
-  const handleNavigation = (item) => {
-    const sectionId = item === 'الرئيسية'
-      ? 'home'
-      : item.toLowerCase().replace(/ /g, '');
+  // Handle normal scroll sections (Home, Why Us, etc.)
+  const handleScrollNavigation = (item) => {
+    const sectionMap = {
+      'الرئيسية': 'home',
+      'Home': 'home',
+      'لماذا نحن': 'whyus',
+      'Why Us': 'whyus',
+      'دراسات الحالة': 'casestudies',
+      'Case Studies': 'casestudies',
+      'آراء العملاء': 'testimonials',
+      'Testimonials': 'testimonials',
+      'تواصل معنا': 'contact',
+      'Contact': 'contact'
+    };
 
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(() => scrollToSection(sectionId), 200);
-    } else {
-      scrollToSection(sectionId);
+    const sectionId = sectionMap[item];
+
+    if (sectionId) {
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => scrollToSection(sectionId), 200);
+      } else {
+        scrollToSection(sectionId);
+      }
+      setIsMenuOpen(false);
     }
   };
 
+  // Special: Services → Go to /all-services page
+  const handleServicesClick = () => {
+    navigate("/all-services");
+    setIsMenuOpen(false);
+  };
+
+  // Special: Clients → Go to /clients page
   const handleClientsNavigation = () => {
-    if (location.pathname === "/clients") {
-      // If already on clients page, close menu
-      setIsMenuOpen(false);
-    } else {
-      // Navigate to clients page
-      navigate("/clients");
-      setIsMenuOpen(false);
-    }
+    navigate("/clients");
+    setIsMenuOpen(false);
   };
+
+  // Get the "Services" text in current language
+  const servicesText = lang === 'ar' ? 'الخدمات' : 'Services';
 
   return (
     <header
@@ -62,7 +82,7 @@ export const Navbar = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
 
-          {/* LOGO → ALWAYS GO HOME */}
+          {/* LOGO → GO HOME */}
           <button onClick={goHome} className="flex items-center gap-2 group cursor-pointer">
             <motion.div
               className="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-300 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg"
@@ -75,21 +95,38 @@ export const Navbar = ({
 
           {/* DESKTOP MENU */}
           <nav className="hidden lg:flex items-center space-x-1 space-x-reverse">
-            {t("nav").map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNavigation(item)}
-                className="px-4 py-2 text-gray-700 hover:text-blue-500 font-medium transition-all rounded-lg hover:bg-blue-50/50"
-              >
-                {item}
-              </button>
-            ))}
-            {/* Clients Page Link */}
+            {t("nav").map((item) => {
+              if (item === servicesText) {
+                // Special handling for Services
+                return (
+                  <button
+                    key={item}
+                    onClick={handleServicesClick}
+                    className="px-4 py-2 text-gray-700 hover:text-blue-500 font-medium transition-all rounded-lg hover:bg-blue-50/50"
+                  >
+                    {item}
+                  </button>
+                );
+              }
+
+              // All other nav items → scroll
+              return (
+                <button
+                  key={item}
+                  onClick={() => handleScrollNavigation(item)}
+                  className="px-4 py-2 text-gray-700 hover:text-blue-500 font-medium transition-all rounded-lg hover:bg-blue-50/50"
+                >
+                  {item}
+                </button>
+              );
+            })}
+
+            {/* Clients Link */}
             <button
               onClick={handleClientsNavigation}
               className="px-4 py-2 text-gray-700 hover:text-blue-500 font-medium transition-all rounded-lg hover:bg-blue-50/50"
             >
-              {t("clients")} {/* Fixed: changed from "Clients" to "clients" */}
+              {t("clients")}
             </button>
           </nav>
 
@@ -125,25 +162,42 @@ export const Navbar = ({
             dir={lang === "ar" ? "rtl" : "ltr"}
           >
             <nav className="px-4 py-4 space-y-2">
-              {t("nav").map((item) => (
-                <button
-                  key={item}
-                  onClick={() => {
-                    handleNavigation(item);
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg font-medium"
-                >
-                  {item}
-                </button>
-              ))}
-              {/* Clients Page Link - Mobile */}
+              {t("nav").map((item) => {
+                if (item === servicesText) {
+                  return (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        handleServicesClick();
+                      }}
+                      className="block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg font-medium"
+                    >
+                      {item}
+                    </button>
+                  );
+                }
+
+                return (
+                  <button
+                    key={item}
+                    onClick={() => {
+                      handleScrollNavigation(item);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg font-medium"
+                  >
+                    {item}
+                  </button>
+                );
+              })}
+
+              {/* Clients in Mobile */}
               <button
                 onClick={handleClientsNavigation}
                 className="block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg font-medium"
               >
-                {t("clients")} {/* This one was already correct */}
+                {t("clients")}
               </button>
+
               <button
                 onClick={() => {
                   setShowQuoteForm(true);

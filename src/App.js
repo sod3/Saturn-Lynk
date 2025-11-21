@@ -18,6 +18,7 @@ import { Chatbot } from "./components/Chatbot";
 
 import ServiceDetail from "./pages/ServiceDetail";
 import Clients from "./pages/Clients"; // Import the Clients page
+import { AllServices } from "./pages/AllServices";
 
 // ---------- Helper to always scroll to top on route change ----------
 const ScrollToTop = () => {
@@ -120,8 +121,11 @@ const SaturnLynkWebsite = () => {
           {/* CLIENTS PAGE */}
           <Route
             path="/clients"
+            showQuoteForm={showQuoteForm}
+            setShowQuoteForm={setShowQuoteForm}
             element={<Clients t={t} lang={lang} />}
           />
+        <Route path="/all-services" element={<AllServices t={t} lang={lang} />} />
         </Routes>
 
         {/* QUOTE MODAL */}

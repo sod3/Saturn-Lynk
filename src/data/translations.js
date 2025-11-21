@@ -18,6 +18,10 @@ export const translations = {
     servicesTitle: 'Tailored Solutions for Saudi Excellence',
     servicesDesc: 'Benefit from high-performance networks that drive efficiency and growth in the Kingdom.',
     learnMore: 'Learn More',
+    showAllServices: "Show All Services",
+    allServices: "All Services",
+    allServicesTitle: "Explore All Our Services",
+    allServicesDesc: "Discover our complete range of professional services designed to help your business grow and succeed.",
 
     // Why Us
     whyChoose: 'Why Choose Saturn Lynk',
@@ -121,6 +125,10 @@ export const translations = {
     servicesTitle: 'حلول مخصصة للتميز السعودي',
     servicesDesc: 'استفد من شبكات عالية الأداء تدفع الكفاءة والنمو في المملكة.',
     learnMore: 'اعرف المزيد',
+    showAllServices: "عرض جميع الخدمات",
+    allServices: "جميع الخدمات",
+    allServicesTitle: "استكشف كل خدماتنا",
+    allServicesDesc: "اكتشف مجموعتنا الكاملة من الخدمات الاحترافية المصممة لمساعدة أعمالك على النمو والنجاح.",
 
     // Why Us
     whyChoose: 'لماذا تختار ساتورن لينك',

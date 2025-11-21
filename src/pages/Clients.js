@@ -1,11 +1,18 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Star, Quote, ArrowRight, ArrowLeft, Users, Award, Clock, Heart } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom'; // ← Added
+import JASLogo from '../assets/1.jpeg';           // Update path if needed
+import ShuhnatcoLogo from '../assets/2.jpeg';
+import LuxuryCartsLogo from '../assets/3.jpeg';
+import GreenValleyLogo from '../assets/4.jpeg';
 
 const Clients = ({ t, lang }) => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Sample client data
   const clients = [
@@ -52,7 +59,7 @@ const Clients = ({ t, lang }) => {
   ];
 
   const stats = [
-    { number: "150+", label: t('happyClients'), icon: Users, color: "from-blue-500 to-cyan-400" },
+    { number: "1000+", label: t('happyClients'), icon: Users, color: "from-blue-500 to-cyan-400" },
     { number: "98%", label: t('satisfactionRate'), icon: Heart, color: "from-green-500 to-emerald-400" },
     { number: "4.9/5", label: t('averageRating'), icon: Star, color: "from-amber-500 to-yellow-400" },
     { number: "24/7", label: t('support'), icon: Clock, color: "from-purple-500 to-pink-400" }
@@ -80,6 +87,32 @@ const Clients = ({ t, lang }) => {
     setIsVisible(true);
   }, []);
 
+  const goToContact = () => {
+    if (location.pathname !== "/") {
+      // If not on homepage → go home first, then scroll
+      navigate("/");
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      // Already on homepage → just smooth scroll
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const clientLogos = [
+    { name: "JAS", logo: JASLogo, alt: "JAS Logo" },
+    { name: "Shuhnat Shipping Company", logo: ShuhnatcoLogo, alt: "Shuhnatco Logo" },
+    { name: "Luxury Carts", logo: LuxuryCartsLogo, alt: "Luxury Carts Logo" },
+    { name: "Green Valley Holdings", logo: GreenValleyLogo, alt: "Green Valley Holdings Logo" },
+  ];
+  
   return (
     <div 
       className="min-h-screen bg-gradient-to-br from-blue-25 via-white to-blue-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8"
@@ -296,9 +329,7 @@ const Clients = ({ t, lang }) => {
           </div>
         </div>
       </motion.div>
-
-      {/* Enhanced Client Logos Section */}
-      <motion.div
+<motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
@@ -313,39 +344,46 @@ const Clients = ({ t, lang }) => {
           </p>
         </div>
         
-        <div className="bg-gradient-to-br from-white to-blue-25 rounded-4xl p-12 shadow-2xl border border-blue-100">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 items-center">
-            {[
-              { name: "TechInnovate", logo: "🚀", color: "from-blue-500 to-cyan-400" },
-              { name: "Global Solutions", logo: "🌍", color: "from-green-500 to-emerald-400" },
-              { name: "Creative Minds", logo: "💡", color: "from-amber-500 to-yellow-400" },
-              { name: "StartUp Ventures", logo: "⚡", color: "from-purple-500 to-pink-400" },
-              { name: "Cloud Systems", logo: "☁️", color: "from-blue-400 to-cyan-300" },
-              { name: "NextGen Tech", logo: "🔬", color: "from-indigo-500 to-purple-400" },
-              { name: "Digital Wave", logo: "🌊", color: "from-cyan-500 to-blue-400" },
-              { name: "Innovate Labs", logo: "🔧", color: "from-orange-500 to-red-400" }
-            ].map((company, index) => (
+        <div className="bg-white/80 backdrop-blur-xl rounded-4xl p-12 shadow-2xl border border-blue-100/50 overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center justify-items-center">
+            {clientLogos.map((client, index) => (
               <motion.div
-                key={company.name}
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.1,
-                  y: -8,
-                  transition: { duration: 0.3 }
-                }}
-                className="flex flex-col items-center justify-center p-6 hover:bg-white rounded-3xl transition-all duration-300 group cursor-pointer"
+                key={client.name}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                whileHover={{ y: -8 }}
+                className="group relative"
               >
-                <div className={`text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 p-4 rounded-2xl bg-gradient-to-r ${company.color} bg-opacity-10`}>
-                  {company.logo}
+                {/* Subtle background glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-3xl blur-xl scale-0 group-hover:scale-110 transition-transform duration-500"></div>
+                
+                {/* Logo Container */}
+                <div className="relative bg-white p-8 rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <img
+                    src={client.logo}
+                    alt={client.alt}
+                    className="w-full h-32 object-contain mx-auto 
+                               filter grayscale group-hover:grayscale-0 
+                               transition-all duration-700 
+                               group-hover:scale-110"
+                  />
                 </div>
-                <div className="text-blue-800 font-bold text-lg text-center group-hover:text-blue-600 transition-colors duration-300">
-                  {company.name}
-                </div>
+
+                {/* Optional: Company name below (uncomment if you want text) */}
+                {/* <p className="mt-4 text-center text-blue-800 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {client.name}
+                </p> */}
               </motion.div>
             ))}
           </div>
+
+          {/* Optional: Add more logos later in empty slots */}
+          {clientLogos.length < 8 && (
+            <div className="col-span-full text-center mt-10">
+              <p className="text-blue-500 italic text-lg">+ Many more trusted partners</p>
+            </div>
+          )}
         </div>
       </motion.div>
 
@@ -384,14 +422,15 @@ const Clients = ({ t, lang }) => {
               {t('joinFamilyDesc')}
             </motion.p>
             <motion.button 
-              className="bg-white text-blue-600 px-12 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+              onClick={goToContact}
+              className="bg-white text-blue-600 px-12 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl hover:shadow-3xl cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.4 }}
             >
-              {t('startProjectToday')}
+              {t('startProjectToday')} <ArrowRight className="inline ml-2 w-5 h-5" />
             </motion.button>
           </div>
         </div>
