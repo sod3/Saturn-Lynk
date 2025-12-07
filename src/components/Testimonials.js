@@ -75,6 +75,34 @@ export default function OurTeam({ t, lang }) {
     }
   };
 
+  // Determine animation direction based on language
+  const getInitialX = () => {
+    return lang === 'ar' ? -80 : 80;
+  };
+
+  const getExitX = () => {
+    return lang === 'ar' ? 80 : -80;
+  };
+
+  // Determine arrow positions based on language
+  const getPrevArrowPosition = () => {
+    return lang === 'ar' ? '-right-2 md:-right-6' : '-left-2 md:-left-6';
+  };
+
+  const getNextArrowPosition = () => {
+    return lang === 'ar' ? '-left-2 md:-left-6' : '-right-2 md:-right-6';
+  };
+
+  // Determine text alignment based on language
+  const getTextAlignment = () => {
+    return lang === 'ar' ? 'md:text-right' : 'md:text-left';
+  };
+
+  // Determine padding for text content based on language
+  const getTextContentPadding = () => {
+    return lang === 'ar' ? 'md:pe-8 lg:pe-10' : 'md:ps-8 lg:ps-10';
+  };
+
   return (
     <section className="relative py-12 md:py-20 px-4 sm:px-6 bg-gradient-to-br from-white via-[#EAF7FF] to-[#DFF3FF] overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       {/* HEADER */}
@@ -103,14 +131,14 @@ export default function OurTeam({ t, lang }) {
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: 80 }}
+              initial={{ opacity: 0, x: getInitialX() }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -80 }}
+              exit={{ opacity: 0, x: getExitX() }}
               transition={{ duration: 0.6 }}
               className="h-full flex flex-col md:flex-row items-center"
             >
-              {/* IMAGE SECTION - Fixed for mobile */}
-              <div className="w-full md:w-1/2">
+              {/* IMAGE SECTION - For Arabic: image should be on the right */}
+              <div className={`w-full md:w-1/2 ${lang === 'ar' ? 'md:order-2' : 'md:order-1'}`}>
                 <div className="relative w-full h-auto md:h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-lg md:shadow-xl">
                   {/* Mobile: Show full image without cropping */}
                   <div className="block md:hidden">
@@ -132,14 +160,14 @@ export default function OurTeam({ t, lang }) {
                 </div>
               </div>
 
-              {/* TEXT CONTENT */}
-              <div className="w-full md:w-1/2 mt-6 md:mt-0 md:ps-8 lg:ps-10">
-                <div className="text-center md:text-left">
+              {/* TEXT CONTENT - For Arabic: text should be on the left */}
+              <div className={`w-full md:w-1/2 mt-6 md:mt-0 ${getTextContentPadding()} ${lang === 'ar' ? 'md:order-1' : 'md:order-2'}`}>
+                <div className={`text-center ${getTextAlignment()}`}>
                   <p className="text-[#0ea5e9] text-lg sm:text-xl md:text-2xl font-semibold mt-1 md:mt-2">
                     {team[index].role}
                   </p>
                   
-                  <p className="text-gray-600 text-sm sm:text-base md:text-lg mt-4 md:mt-6 leading-relaxed">
+                  <p className={`text-gray-600 text-sm sm:text-base md:text-lg mt-4 md:mt-6 leading-relaxed ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                     {team[index].message}
                   </p>
                 </div>
@@ -148,29 +176,37 @@ export default function OurTeam({ t, lang }) {
           </AnimatePresence>
         </div>
 
-        {/* ARROWS - Responsive positioning */}
+        {/* ARROWS - Responsive positioning with language support */}
         <button
-          className="absolute top-1/2 -left-2 md:-left-6 transform -translate-y-1/2 bg-white shadow-lg w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition z-10"
+          className={`absolute top-1/2 ${getPrevArrowPosition()} transform -translate-y-1/2 bg-white shadow-lg w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition z-10`}
           onClick={prev}
-          aria-label="Previous member"
+          aria-label={lang === 'ar' ? "العضو التالي" : "Previous member"}
         >
-          <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+          {lang === 'ar' ? (
+            <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+          ) : (
+            <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+          )}
         </button>
 
         <button
-          className="absolute top-1/2 -right-2 md:-right-6 transform -translate-y-1/2 bg-white shadow-lg w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition z-10"
+          className={`absolute top-1/2 ${getNextArrowPosition()} transform -translate-y-1/2 bg-white shadow-lg w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition z-10`}
           onClick={next}
-          aria-label="Next member"
+          aria-label={lang === 'ar' ? "العضو السابق" : "Next member"}
         >
-          <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+          {lang === 'ar' ? (
+            <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+          ) : (
+            <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+          )}
         </button>
 
         {/* AUTO-SCROLL TOGGLE BUTTON */}
         <button
-          className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-white/90 shadow-lg w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition backdrop-blur-sm z-10"
+          className={`absolute bottom-3 ${lang === 'ar' ? 'left-3 md:left-4' : 'right-3 md:right-4'} bg-white/90 shadow-lg w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition backdrop-blur-sm z-10`}
           onClick={toggleAutoScroll}
-          title={autoScroll ? "Pause auto-scroll" : "Play auto-scroll"}
-          aria-label={autoScroll ? "Pause auto-scroll" : "Play auto-scroll"}
+          title={autoScroll ? (lang === 'ar' ? "إيقاف التمرير التلقائي" : "Pause auto-scroll") : (lang === 'ar' ? "تشغيل التمرير التلقائي" : "Play auto-scroll")}
+          aria-label={autoScroll ? (lang === 'ar' ? "إيقاف التمرير التلقائي" : "Pause auto-scroll") : (lang === 'ar' ? "تشغيل التمرير التلقائي" : "Play auto-scroll")}
         >
           {autoScroll ? (
             <Pause className="w-3 h-3 md:w-5 md:h-5 text-gray-700" />
@@ -192,7 +228,7 @@ export default function OurTeam({ t, lang }) {
             className={`w-3 h-3 md:w-4 md:h-4 rounded-full cursor-pointer transition ${
               i === index ? "bg-[#0ea5e9]" : "bg-gray-300 hover:bg-gray-400"
             }`}
-            aria-label={`Go to team member ${i + 1}`}
+            aria-label={lang === 'ar' ? `الانتقال إلى العضو ${i + 1}` : `Go to team member ${i + 1}`}
           ></button>
         ))}
       </div>
