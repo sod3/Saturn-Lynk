@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Users, Pause, Play } from "lucide-react";
 
@@ -9,7 +9,7 @@ export default function OurTeam({ t, lang }) {
 
   const [index, setIndex] = useState(0);
   const [autoScroll, setAutoScroll] = useState(true);
-  const [intervalId, setIntervalId] = useState(null);
+  const intervalRef = useRef(null);
 
   const prev = useCallback(() => {
     setIndex((i) => (i === 0 ? team.length - 1 : i - 1));
@@ -22,23 +22,26 @@ export default function OurTeam({ t, lang }) {
   }, [team.length]);
 
   const startAutoScroll = useCallback(() => {
-    if (intervalId) clearInterval(intervalId);
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
     
-    const id = setInterval(() => {
+    // Set new interval
+    intervalRef.current = setInterval(() => {
       setIndex((currentIndex) => (currentIndex === team.length - 1 ? 0 : currentIndex + 1));
     }, 5000);
     
-    setIntervalId(id);
     setAutoScroll(true);
-  }, [team.length, intervalId]);
+  }, [team.length]);
 
   const stopAutoScroll = useCallback(() => {
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId(null);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
     setAutoScroll(false);
-  }, [intervalId]);
+  }, []);
 
   const toggleAutoScroll = useCallback(() => {
     if (autoScroll) {
@@ -59,9 +62,11 @@ export default function OurTeam({ t, lang }) {
     startAutoScroll();
     
     return () => {
-      if (intervalId) clearInterval(intervalId);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
-  }, []);
+  }, [startAutoScroll]);
 
   const handleMouseEnter = () => {
     if (autoScroll) {
@@ -128,52 +133,57 @@ export default function OurTeam({ t, lang }) {
         onMouseLeave={handleMouseLeave}
       >
         <div className="relative bg-white/90 border border-[#C8EBFF] shadow-xl md:shadow-2xl rounded-2xl md:rounded-3xl p-6 md:p-10 overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: getInitialX() }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: getExitX() }}
-              transition={{ duration: 0.6 }}
-              className="h-full flex flex-col md:flex-row items-center"
-            >
-              {/* IMAGE SECTION - For Arabic: image should be on the right */}
-              <div className={`w-full md:w-1/2 ${lang === 'ar' ? 'md:order-2' : 'md:order-1'}`}>
-                <div className="relative w-full h-auto md:h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-lg md:shadow-xl">
-                  {/* Mobile: Show full image without cropping */}
-                  <div className="block md:hidden">
-                    <img
-                      src={team[index].img}
-                      alt={team[index].name}
-                      className="w-full h-auto max-h-[300px] object-contain"
-                    />
-                  </div>
-                  
-                  {/* Desktop: Keep the original cover style */}
-                  <div className="hidden md:block">
-                    <img
-                      src={team[index].img}
-                      alt={team[index].name}
-                      className="w-full h-full min-h-[400px] object-cover object-center"
-                    />
+          <div className="min-h-[300px] md:min-h-[450px] flex items-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: getInitialX() }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: getExitX() }}
+                transition={{ duration: 0.6 }}
+                className="h-full w-full flex flex-col md:flex-row items-center"
+              >
+                {/* IMAGE SECTION - For Arabic: image should be on the right */}
+                <div className={`w-full md:w-1/2 ${lang === 'ar' ? 'md:order-2' : 'md:order-1'}`}>
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    {/* Mobile: Show full image with consistent height */}
+                    <div className="block md:hidden w-full h-[350px] flex items-center justify-center">
+                      <img
+                        src={team[index].img}
+                        alt={team[index].name}
+                        className="w-full h-full object-contain max-w-full max-h-full"
+                      />
+                    </div>
+                    
+                    {/* Desktop: Fixed height with object-contain */}
+                    <div className="hidden md:block w-full h-[500px] flex items-center justify-center">
+                      <img
+                        src={team[index].img}
+                        alt={team[index].name}
+                        className="w-full h-full object-contain max-w-full max-h-full"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* TEXT CONTENT - For Arabic: text should be on the left */}
-              <div className={`w-full md:w-1/2 mt-6 md:mt-0 ${getTextContentPadding()} ${lang === 'ar' ? 'md:order-1' : 'md:order-2'}`}>
-                <div className={`text-center ${getTextAlignment()}`}>
-                  <p className="text-[#0ea5e9] text-lg sm:text-xl md:text-2xl font-semibold mt-1 md:mt-2">
-                    {team[index].role}
-                  </p>
-                  
-                  <p className={`text-gray-600 text-sm sm:text-base md:text-lg mt-4 md:mt-6 leading-relaxed ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {team[index].message}
-                  </p>
+                {/* TEXT CONTENT - For Arabic: text should be on the left */}
+                <div className={`w-full md:w-1/2 mt-6 md:mt-0 ${getTextContentPadding()} ${lang === 'ar' ? 'md:order-1' : 'md:order-2'}`}>
+                  <div className={`h-full flex flex-col justify-center ${getTextAlignment()}`}>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+                      {team[index].name}
+                    </h3>
+                    <p className="text-[#0ea5e9] text-lg sm:text-xl md:text-2xl font-semibold mt-1 md:mt-2">
+                      {team[index].role}
+                    </p>
+                    
+                    <p className={`text-gray-600 text-sm sm:text-base md:text-lg mt-4 md:mt-6 leading-relaxed ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {team[index].message}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* ARROWS - Responsive positioning with language support */}
