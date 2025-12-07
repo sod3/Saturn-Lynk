@@ -1,76 +1,254 @@
-import { motion } from 'framer-motion';
-import { Star, ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Star, ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { useRef } from 'react';
 
-export const Hero = ({ setShowQuoteForm, scrollToSection, t, lang }) => (
-  <section id="home" className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-    {/* Background Video */}
-    <div className="absolute inset-0 z-0">
-      <video 
-        autoPlay 
-        muted 
-        loop 
-        className="w-full h-full object-cover"
-        style={{ opacity: 0.7 }} // Lower opacity for better text visibility
+export const Hero = ({ setShowQuoteForm, scrollToSection, t, lang }) => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  return (
+    <section 
+      ref={sectionRef}
+      id="home" 
+      className="relative min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-[#EAF6FF] via-white to-[#CFE8FF]" 
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    >
+      {/* 3D Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large Floating Orbs */}
+        <motion.div 
+          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#3EA6FF]/30 to-[#CFE8FF]/20 rounded-full blur-3xl"
+          animate={{ 
+            y: [0, -40, 0],
+            x: [0, 20, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute top-40 right-20 w-80 h-80 bg-gradient-to-br from-[#3EA6FF]/20 to-blue-300/30 rounded-full blur-3xl"
+          animate={{ 
+            y: [0, 40, 0],
+            x: [0, -30, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div 
+          className="absolute bottom-20 left-1/3 w-72 h-72 bg-gradient-to-br from-cyan-300/20 to-[#CFE8FF]/30 rounded-full blur-3xl"
+          animate={{ 
+            y: [0, -30, 0],
+            scale: [1, 1.15, 1]
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+
+        {/* Floating Geometric Shapes */}
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-16 h-16 border-4 border-[#3EA6FF]/30 rounded-lg"
+          animate={{ 
+            rotate: [0, 90, 180, 270, 360],
+            y: [0, -20, 0]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/3 w-12 h-12 bg-gradient-to-br from-[#3EA6FF]/20 to-cyan-400/20 rounded-full"
+          animate={{ 
+            y: [0, -40, 0],
+            x: [0, 20, 0]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/3 left-1/4 w-20 h-20 border-2 border-cyan-400/20 rounded-full"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      {/* Main Content */}
+      <motion.div 
+        className="max-w-6xl mx-auto relative z-10"
+        style={{ y, opacity }}
       >
-        <source src="/1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-
-    {/* Animated Background Elements */}
-    <div className="absolute inset-0 opacity-20 pointer-events-none">
-      <motion.div 
-        className="absolute top-10 left-20 w-64 h-64 bg-blue-200 rounded-full blur-3xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div 
-        className="absolute bottom-10 right-20 w-80 h-80 bg-cyan-200 rounded-full blur-3xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-    </div>
-
-    {/* Content */}
-    <div className="max-w-4xl mx-auto relative z-10">
-      <motion.div 
-        className="text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <motion.span 
-          className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm mb-4 text-sm font-medium text-blue-600"
-          whileHover={{ scale: 1.05 }}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          <Star className="w-4 h-4 text-yellow-400 fill-current" /> {t('trustedBy')}
-        </motion.span>
-        
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-gray-900">
-          {t('heroTitle')}<span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">{t('heroHighlight')}</span>
-        </h1>
-        
-        <p className="text-lg sm:text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-          {t('heroDesc')}
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <motion.button 
-            onClick={() => setShowQuoteForm(true)}
-            className="px-6 py-3 bg-gradient-to-r from-blue-400 to-cyan-300 text-white rounded-xl font-semibold shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05 }}
+          {/* Premium Badge */}
+          <motion.span 
+            className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg mb-8 text-sm font-semibold text-[#3EA6FF] border border-[#CFE8FF]/50"
+            initial={{ scale: 0, rotate: -10 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 200, 
+              damping: 15,
+              delay: 0.2 
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: "0 20px 40px rgba(62, 166, 255, 0.2)"
+            }}
           >
-            {t('startProject')} <ArrowRight className="w-4 h-4" />
-          </motion.button>
-          <motion.button 
-            onClick={() => scrollToSection('services')}
-            className="px-6 py-3 bg-white/90 backdrop-blur-sm text-blue-500 rounded-xl font-semibold shadow-md hover:shadow-lg border border-blue-200 flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05 }}
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles className="w-5 h-5 text-yellow-400" />
+            </motion.div>
+            <span>{t('trustedBy')}</span>
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Star className="w-5 h-5 text-yellow-400 fill-current" />
+            </motion.div>
+          </motion.span>
+          
+          {/* Main Heading with Staggered Animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
           >
-            {t('discoverServices')}
-          </motion.button>
-        </div>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 leading-tight">
+              <motion.span 
+                className="block text-gray-900 mb-2"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                {t('heroTitle')}
+              </motion.span>
+              <motion.span 
+                className="block bg-gradient-to-r from-[#3EA6FF] via-blue-500 to-cyan-400 bg-clip-text text-transparent"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
+                {t('heroHighlight')}
+              </motion.span>
+            </h1>
+          </motion.div>
+          
+          {/* Description */}
+          <motion.p 
+            className="text-xl sm:text-2xl text-gray-700 mb-10 max-w-4xl mx-auto leading-relaxed font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+          >
+            {t('heroDesc')}
+          </motion.p>
+          
+          {/* CTA Buttons */}
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-5 justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+          >
+            <motion.button 
+              onClick={() => setShowQuoteForm(true)}
+              className="group relative px-8 py-4 bg-gradient-to-r from-[#3EA6FF] to-cyan-400 text-white rounded-2xl font-bold text-lg shadow-xl overflow-hidden"
+              whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(62, 166, 255, 0.4)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* Animated background effect */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10 flex items-center gap-2">
+                {t('startProject')}
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.div>
+              </span>
+            </motion.button>
+
+            <motion.button 
+              onClick={() => scrollToSection('services')}
+              className="group px-8 py-4 bg-white/90 backdrop-blur-md text-[#3EA6FF] rounded-2xl font-bold text-lg shadow-lg border-2 border-[#CFE8FF] hover:border-[#3EA6FF] transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="flex items-center gap-2">
+                {t('discoverServices')}
+                <Zap className="w-5 h-5" />
+              </span>
+            </motion.button>
+          </motion.div>
+
+          {/* Floating Stats/Trust Indicators */}
+          <motion.div 
+            className="mt-16 flex flex-wrap justify-center gap-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+          >
+            {[
+              { value: "1000+", label: t('happyClients') || "Happy Clients" },
+              { value: "98%", label: t('satisfactionRate') || "Satisfaction" },
+              { value: "24/7", label: t('support') || "Support" }
+            ].map((stat, idx) => (
+              <motion.div
+                key={idx}
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3 + idx * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="text-3xl font-black bg-gradient-to-r from-[#3EA6FF] to-cyan-500 bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-600 font-medium mt-1">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </motion.div>
-    </div>
-  </section>
-);
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-6 h-10 border-2 border-[#3EA6FF] rounded-full flex justify-center p-2"
+        >
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1.5 h-1.5 bg-[#3EA6FF] rounded-full"
+          />
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};

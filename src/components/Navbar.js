@@ -34,10 +34,8 @@ export const Navbar = ({
       'Home': 'home',
       'لماذا نحن': 'whyus',
       'Why Us': 'whyus',
-      'دراسات الحالة': 'casestudies',
-      'Case Studies': 'casestudies',
-      'آراء العملاء': 'testimonials',
-      'Testimonials': 'testimonials',
+      'فريقنا': 'ourteam',
+      'Our Team': 'ourteam',
       'تواصل معنا': 'contact',
       'Contact': 'contact'
     };

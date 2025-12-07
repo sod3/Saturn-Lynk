@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     // Navbar
-    nav: ['Home', 'Services', 'Why Us', 'Case Studies', 'Testimonials', 'Contact'],
+    nav: ['Home', 'Services', 'Why Us', 'Our Team', 'Contact'],
     freeConsultation: 'Free Consultation',
     clients: 'Our Clients', // Added clients key
 
@@ -30,8 +30,6 @@ export const translations = {
     points: [
       { title: "Unmatched Security", desc: "Enterprise-level protection aligned with Saudi regulations." },
       { title: "Lightning-Fast Deployment", desc: "Rapid implementation to accelerate your business goals." },
-      { title: "Expert Saudi Team", desc: "Local specialists understanding Kingdom-specific needs." },
-      { title: "Proven Excellence", desc: "Award-winning solutions for visionary enterprises." },
       { title: "24/7 Premium Support", desc: "Dedicated assistance ensuring zero downtime." },
       { title: "Future-Proof Innovation", desc: "AI-integrated systems for long-term growth." }
     ],
@@ -50,10 +48,24 @@ export const translations = {
     caseDesc: 'See how we\'ve transformed businesses in the Kingdom.',
     viewDetails: 'View Details',
 
-    // Testimonials
-    clientVoices: 'Client Voices',
-    hearFrom: 'Hear From Our Partners',
-    hearDesc: 'Real experiences from satisfied Saudi clients.',
+    // Our Team
+    ourTeam: 'Our Team',
+    teamTitle: 'Meet the People Behind Our Success',
+    teamDesc: 'Dedicated leaders shaping the future with innovation, strategy, and purpose.',
+    teamMembers: [
+      {
+        name: "General Manager",
+        role: "Message from General Manager",
+        message:
+          "At Saturn Lynk Technologies, we are committed to delivering reliable, innovative, and efficient IT solutions that meet the evolving needs of our clients. Our focus is on maintaining high-quality standards, ensuring timely delivery, and providing exceptional customer support.  We believe in building long-term relationships based on trust, transparency, and excellence. As we continue to grow, our priority remains the same to empower businesses with technology that drives success. Thank you for choosing Saturn Lynk Technologies.",
+      },
+      {
+        name: "Country Sales Manager",
+        role: "Message from Country Sales Manager",
+        message:
+          "At Saturn Lynk Technologies, our goal is to deliver the highest level of value and service to clients across the Kingdom. We strive to understand our customers’ needs and provide tailored IT solutions that support their growth and success.  With a strong focus on responsiveness, quality, and long-term partnerships, our sales team is dedicated to ensuring that every client receives exceptional support from the first inquiry to project completion and beyond.  We look forward to serving you and helping your business achieve its full potential."
+      },
+    ],
 
     // Contact
     getInTouch: 'Get in Touch',
@@ -61,7 +73,7 @@ export const translations = {
     contactDesc: 'Contact us for a free consultation or via WhatsApp.',
     phone: '+966 55 125 4121',
     email: 'info@saturnlynk.sa',
-    location: 'Riyadh, Saudi Arabia',
+    location: 'Jeddah, Saudi Arabia',
     chatWhatsApp: 'Chat on WhatsApp',
     yourName: 'Your Name',
     yourEmail: 'Your Email',
@@ -122,7 +134,7 @@ export const translations = {
   },
   ar: {
     // Navbar
-    nav: ['الرئيسية', 'الخدمات', 'لماذا نحن', 'دراسات الحالة', 'آراء العملاء', 'تواصل معنا'],
+    nav: ['الرئيسية', 'الخدمات', 'لماذا نحن', 'دراسات الحالة', 'فريقنا', 'تواصل معنا'],
     freeConsultation: 'استشارة مجانية',
     clients: 'عملاؤنا', // Added clients key
 
@@ -151,8 +163,6 @@ export const translations = {
     points: [
       { title: "أمان لا مثيل له", desc: "حماية على مستوى المؤسسات تتماشى مع اللوائح السعودية." },
       { title: "نشر فائق السرعة", desc: "تنفيذ سريع لتسريع أهداف عملك." },
-      { title: "فريق سعودي متخصص", desc: "خبراء محليون يفهمون احتياجات المملكة." },
-      { title: "تميز مثبت", desc: "حلول حائزة على جوائز للمؤسسات الرائدة." },
       { title: "دعم متميز 24/7", desc: "مساعدة مخصصة لضمان عدم التوقف." },
       { title: "ابتكار مستقبلي", desc: "أنظمة مدعومة بالذكاء الاصطناعي للنمو طويل الأمد." }
     ],
@@ -171,10 +181,24 @@ export const translations = {
     caseDesc: 'شاهد كيف غيرنا أعمال الشركات في المملكة.',
     viewDetails: 'عرض التفاصيل',
 
-    // Testimonials
-    clientVoices: 'أصوات العملاء',
-    hearFrom: 'استمع من شركائنا',
-    hearDesc: 'تجارب حقيقية من عملاء سعوديين راضين.',
+    // Our Team
+    ourTeam: 'فريقنا',
+    teamTitle: 'تعرف على الأشخاص وراء نجاحنا',
+    teamDesc: 'قادة ملتزمون يشكلون المستقبل بالابتكار والاستراتيجية والغاية.',
+    teamMembers: [
+      {
+        name: "المدير العام",
+        role: "رسالة من المدير العام",
+        message:
+          "في شركة ساتورن لينك تكنولوجيز، نحن ملتزمون بتقديم حلول تقنية معلومات موثوقة ومبتكرة وفعالة تلبي احتياجات عملائنا المتطورة. تركيزنا على الحفاظ على معايير الجودة العالية، ضمان التسليم في الوقت المحدد، وتقديم دعم عملاء استثنائي. نحن نؤمن ببناء علاقات طويلة الأمد مبنية على الثقة والشفافية والتميز. مع استمرار نمونا، يظل أولويتنا كما هي: تمكين الأعمال بالتكنولوجيا التي تدفع النجاح. شكراً لاختياركم شركة ساتورن لينك تكنولوجيز.",
+      },
+      {
+        name: "مدير المبيعات الوطني",
+        role: "مدير المبيعات الوطني",
+        message:
+          "في شركة ساتورن لينك تكنولوجيز، هدفنا هو تقديم أعلى مستوى من القيمة والخدمة لعملائنا عبر المملكة. نسعى لفهم احتياجات عملائنا وتقديم حلول تقنية معلومات مخصصة تدعم نموهم ونجاحهم. مع تركيز قوي على الاستجابة والجودة والشراكات طويلة الأمد، فريق المبيعات لدينا ملتزم بضمان أن يحصل كل عميل على دعم استثنائي من الاستفسار الأول إلى إكمال المشروع وما بعده. نتطلع إلى خدمتكم ومساعدة أعمالكم على تحقيق إمكانياتها الكاملة.",
+      },
+    ],
 
     // Contact
     getInTouch: 'تواصل معنا',
@@ -182,7 +206,7 @@ export const translations = {
     contactDesc: 'تواصل معنا لاستشارة مجانية أو عبر واتساب.',
     phone: '+966 55 125 4121',
     email: 'info@saturnlynk.sa',
-    location: 'الرياض، المملكة العربية السعودية',
+    location: 'جدة، المملكة العربية السعودية',
     chatWhatsApp: 'دردشة على واتساب',
     yourName: 'اسمك',
     yourEmail: 'بريدك الإلكتروني',

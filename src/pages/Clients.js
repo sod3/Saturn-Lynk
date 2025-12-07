@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Star, Quote, ArrowRight, ArrowLeft, Users, Award, Clock, Heart } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom'; // ← Added
-import JASLogo from '../assets/1.jpeg';           // Update path if needed
+import { useNavigate, useLocation } from 'react-router-dom';
+import JASLogo from '../assets/1.jpeg';
 import ShuhnatcoLogo from '../assets/2.jpeg';
 import LuxuryCartsLogo from '../assets/3.jpeg';
 import GreenValleyLogo from '../assets/4.jpeg';
@@ -14,44 +14,32 @@ const Clients = ({ t, lang }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Sample client data
+  // Sample client data - removed image property
   const clients = [
     {
       id: 1,
-      name: "Sarah Johnson",
-      company: "TechInnovate Inc.",
       position: "CEO",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
       rating: 5,
       testimonial: "Working with this team transformed our digital presence. Their attention to detail and creative solutions exceeded our expectations.",
       project: "Website Redesign"
     },
     {
       id: 2,
-      name: "Michael Chen",
-      company: "Global Solutions Ltd.",
       position: "Marketing Director",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       rating: 5,
       testimonial: "The level of professionalism and technical expertise is outstanding. They delivered our project ahead of schedule with impeccable quality.",
       project: "E-commerce Platform"
     },
     {
       id: 3,
-      name: "Emily Rodriguez",
-      company: "Creative Minds Agency",
       position: "Creative Director",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       rating: 4,
       testimonial: "Outstanding collaboration and innovative thinking. They understood our vision perfectly and brought it to life beautifully.",
       project: "Brand Identity"
     },
     {
       id: 4,
-      name: "David Thompson",
-      company: "StartUp Ventures",
       position: "Founder",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       rating: 5,
       testimonial: "As a startup, we needed a partner who could grow with us. Their scalable solutions and ongoing support have been invaluable.",
       project: "Mobile App Development"
@@ -89,7 +77,6 @@ const Clients = ({ t, lang }) => {
 
   const goToContact = () => {
     if (location.pathname !== "/") {
-      // If not on homepage → go home first, then scroll
       navigate("/");
       setTimeout(() => {
         const contactSection = document.getElementById("contact");
@@ -98,7 +85,6 @@ const Clients = ({ t, lang }) => {
         }
       }, 300);
     } else {
-      // Already on homepage → just smooth scroll
       const contactSection = document.getElementById("contact");
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: "smooth" });
@@ -118,7 +104,7 @@ const Clients = ({ t, lang }) => {
       className="min-h-screen bg-gradient-to-br from-blue-25 via-white to-blue-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
-      {/* Header Section with Enhanced Design */}
+      {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -195,26 +181,26 @@ const Clients = ({ t, lang }) => {
         </div>
       </motion.div>
 
-      {/* Enhanced Testimonials Section */}
+      {/* Enhanced Testimonials Section - Fixed Responsive Issues */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
         className="max-w-5xl mx-auto mb-24"
       >
-        <div className="bg-gradient-to-br from-white to-blue-25 rounded-4xl shadow-2xl p-8 md:p-12 relative overflow-hidden border border-blue-100">
+        <div className="bg-gradient-to-br from-white to-blue-25 rounded-4xl shadow-2xl p-6 md:p-12 relative overflow-hidden border border-blue-100">
           {/* Enhanced Background Decorations */}
           <div className={`absolute top-0 ${lang === 'ar' ? 'left-0' : 'right-0'} w-40 h-40 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full -translate-y-20 ${lang === 'ar' ? '-translate-x-20' : 'translate-x-20'} opacity-60`}></div>
           <div className={`absolute bottom-0 ${lang === 'ar' ? 'right-0' : 'left-0'} w-32 h-32 bg-gradient-to-tr from-cyan-100 to-blue-100 rounded-full translate-y-16 ${lang === 'ar' ? 'translate-x-16' : '-translate-x-16'} opacity-50`}></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-50 rounded-full opacity-20 blur-3xl"></div>
           
           <div className="relative z-10">
-            <div className={`flex items-center justify-between mb-12 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-900 to-cyan-700 bg-clip-text text-transparent mb-3">
+            <div className={`flex flex-col sm:flex-row items-center justify-between mb-8 md:mb-12 gap-4 ${lang === 'ar' ? 'sm:flex-row-reverse' : ''}`}>
+              <div className="text-center sm:text-left">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-900 to-cyan-700 bg-clip-text text-transparent mb-3">
                   {t('clientTestimonials')}
                 </h2>
-                <p className="text-blue-600 text-lg">{t('hearDesc')}</p>
+                <p className="text-blue-600 text-sm md:text-lg">{t('hearDesc')}</p>
               </div>
               <div className={`flex items-center space-x-3 ${lang === 'ar' ? 'space-x-reverse' : ''}`}>
                 <motion.button
@@ -222,11 +208,11 @@ const Clients = ({ t, lang }) => {
                   onMouseEnter={() => setIsAutoPlaying(false)}
                   whileHover={{ scale: 1.1, backgroundColor: "#3b82f6" }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-2xl bg-blue-100 text-blue-700 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-lg"
+                  className="p-2 md:p-3 rounded-2xl bg-blue-100 text-blue-700 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-lg"
                 >
                   {lang === 'ar' ? 
-                    <ArrowRight size={24} /> : 
-                    <ArrowLeft size={24} />
+                    <ArrowRight size={20} className="w-4 h-4 md:w-6 md:h-6" /> : 
+                    <ArrowLeft size={20} className="w-4 h-4 md:w-6 md:h-6" />
                   }
                 </motion.button>
                 <motion.button
@@ -234,17 +220,17 @@ const Clients = ({ t, lang }) => {
                   onMouseEnter={() => setIsAutoPlaying(false)}
                   whileHover={{ scale: 1.1, backgroundColor: "#3b82f6" }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-2xl bg-blue-100 text-blue-700 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-lg"
+                  className="p-2 md:p-3 rounded-2xl bg-blue-100 text-blue-700 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-lg"
                 >
                   {lang === 'ar' ? 
-                    <ArrowLeft size={24} /> : 
-                    <ArrowRight size={24} />
+                    <ArrowLeft size={20} className="w-4 h-4 md:w-6 md:h-6" /> : 
+                    <ArrowRight size={20} className="w-4 h-4 md:w-6 md:h-6" />
                   }
                 </motion.button>
               </div>
             </div>
 
-            <div className="relative min-h-80">
+            <div className="relative min-h-64 md:min-h-80">
               {clients.map((client, index) => (
                 <motion.div
                   key={client.id}
@@ -257,50 +243,39 @@ const Clients = ({ t, lang }) => {
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   className={`absolute inset-0 ${index === activeTestimonial ? 'block' : 'hidden'}`}
                 >
-                  <div className={`flex flex-col lg:flex-row items-center ${lang === 'ar' ? 'lg:flex-row-reverse' : ''} gap-8`}>
-                    <motion.div
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                      className="flex-shrink-0 relative"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-300 rounded-full blur-md opacity-50"></div>
-                      <img
-                        src={client.image}
-                        alt={client.name}
-                        className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-2xl relative z-10"
-                      />
-                    </motion.div>
-                    <div className={`flex-1 text-center lg:text-${lang === 'ar' ? 'right' : 'left'}`}>
-                      <Quote className={`w-12 h-12 text-blue-300 mb-6 ${lang === 'ar' ? 'lg:ml-auto lg:mr-0' : 'lg:mr-auto lg:ml-0'} mx-auto lg:mx-0`} />
-                      <p className="text-xl text-blue-800 mb-8 leading-relaxed font-light italic">
-                        "{client.testimonial}"
-                      </p>
-                      <div className={`flex items-center justify-center lg:justify-${lang === 'ar' ? 'end' : 'start'} space-x-1 mb-4 ${lang === 'ar' ? 'space-x-reverse' : ''}`}>
-                        {[...Array(5)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.3, delay: i * 0.1 }}
-                          >
-                            <Star
-                              size={20}
-                              className={i < client.rating ? "text-yellow-400 fill-current" : "text-gray-300"}
-                            />
-                          </motion.div>
-                        ))}
+                  <div className="text-center">
+                    {/* Quote Icon */}
+                    <Quote className="w-8 h-8 md:w-12 md:h-12 text-blue-300 mb-4 md:mb-6 mx-auto" />
+                    
+                    {/* Testimonial Text - Fixed responsive text overflow */}
+                    <p className="text-base md:text-lg lg:text-xl text-blue-800 mb-6 md:mb-8 leading-relaxed font-light italic px-2 md:px-4 line-clamp-4 md:line-clamp-none">
+                      "{client.testimonial}"
+                    </p>
+
+                    {/* Rating Stars */}
+                    <div className={`flex items-center justify-center space-x-1 mb-4 ${lang === 'ar' ? 'space-x-reverse' : ''}`}>
+                      {[...Array(5)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.3, delay: i * 0.1 }}
+                        >
+                          <Star
+                            size={18}
+                            className={`${i < client.rating ? "text-yellow-400 fill-current" : "text-gray-300"} w-4 h-4 md:w-5 md:h-5`}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Client Info */}
+                    <div className="space-y-2">
+                      <div className="font-bold text-blue-900 text-lg md:text-xl lg:text-2xl">
+                        {client.position}
                       </div>
-                      <div className={`text-${lang === 'ar' ? 'right' : 'left'}`}>
-                        <div className="font-bold text-blue-900 text-2xl mb-2">
-                          {client.name}
-                        </div>
-                        <div className="text-blue-600 text-lg mb-1">
-                          {client.position} {t('at')} {client.company}
-                        </div>
-                        <div className="text-blue-500 font-medium">
-                          {t('project')}: {client.project}
-                        </div>
+                      <div className="text-blue-500 font-medium text-sm md:text-base">
+                        {t('project')}: {client.project}
                       </div>
                     </div>
                   </div>
@@ -309,7 +284,7 @@ const Clients = ({ t, lang }) => {
             </div>
 
             {/* Enhanced Dots Indicator */}
-            <div className="flex justify-center space-x-3 mt-12">
+            <div className="flex justify-center space-x-3 mt-8 md:mt-12">
               {clients.map((_, index) => (
                 <motion.button
                   key={index}
@@ -318,9 +293,9 @@ const Clients = ({ t, lang }) => {
                     setIsAutoPlaying(false);
                   }}
                   whileHover={{ scale: 1.2 }}
-                  className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                  className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
                     index === activeTestimonial 
-                      ? 'bg-gradient-to-r from-blue-500 to-cyan-400 w-12' 
+                      ? 'bg-gradient-to-r from-blue-500 to-cyan-400 w-8 md:w-12' 
                       : 'bg-blue-200 hover:bg-blue-300'
                   }`}
                 />
@@ -329,7 +304,9 @@ const Clients = ({ t, lang }) => {
           </div>
         </div>
       </motion.div>
-<motion.div
+
+      {/* Client Logos Section */}
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
@@ -339,13 +316,13 @@ const Clients = ({ t, lang }) => {
           <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-900 to-cyan-700 bg-clip-text text-transparent mb-4">
             {t('trustedByLeaders')}
           </h2>
-          <p className="text-blue-600 text-xl max-w-2xl mx-auto">
+          <p className="text-blue-600 text-lg md:text-xl max-w-2xl mx-auto">
             {lang === 'ar' ? 'شراكات مع رواد الصناعة لتقديم نتائج استثنائية' : 'Partnering with industry pioneers to deliver exceptional results'}
           </p>
         </div>
         
-        <div className="bg-white/80 backdrop-blur-xl rounded-4xl p-12 shadow-2xl border border-blue-100/50 overflow-hidden">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center justify-items-center">
+        <div className="bg-white/80 backdrop-blur-xl rounded-4xl p-6 md:p-12 shadow-2xl border border-blue-100/50 overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center">
             {clientLogos.map((client, index) => (
               <motion.div
                 key={client.name}
@@ -355,33 +332,25 @@ const Clients = ({ t, lang }) => {
                 whileHover={{ y: -8 }}
                 className="group relative"
               >
-                {/* Subtle background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-3xl blur-xl scale-0 group-hover:scale-110 transition-transform duration-500"></div>
                 
-                {/* Logo Container */}
-                <div className="relative bg-white p-8 rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                <div className="relative bg-white p-4 md:p-8 rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 border border-gray-100">
                   <img
                     src={client.logo}
                     alt={client.alt}
-                    className="w-full h-32 object-contain mx-auto 
+                    className="w-full h-20 md:h-32 object-contain mx-auto 
                                filter grayscale group-hover:grayscale-0 
                                transition-all duration-700 
                                group-hover:scale-110"
                   />
                 </div>
-
-                {/* Optional: Company name below (uncomment if you want text) */}
-                {/* <p className="mt-4 text-center text-blue-800 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {client.name}
-                </p> */}
               </motion.div>
             ))}
           </div>
 
-          {/* Optional: Add more logos later in empty slots */}
           {clientLogos.length < 8 && (
-            <div className="col-span-full text-center mt-10">
-              <p className="text-blue-500 italic text-lg">+ Many more trusted partners</p>
+            <div className="col-span-full text-center mt-8 md:mt-10">
+              <p className="text-blue-500 italic text-sm md:text-lg">+ Many more trusted partners</p>
             </div>
           )}
         </div>
@@ -395,18 +364,16 @@ const Clients = ({ t, lang }) => {
         className="text-center"
       >
         <div className="relative">
-          {/* Background Elements */}
           <div className="absolute top-0 left-1/4 w-32 h-32 bg-blue-200 rounded-full opacity-20 blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-cyan-200 rounded-full opacity-30 blur-3xl"></div>
           
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-4xl p-12 md:p-16 text-white max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
-            {/* Floating Elements */}
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-4xl p-8 md:p-12 lg:p-16 text-white max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
             <div className="absolute top-4 left-4 w-8 h-8 bg-white opacity-10 rounded-full"></div>
             <div className="absolute bottom-8 right-8 w-12 h-12 bg-white opacity-10 rounded-full"></div>
             <div className="absolute top-8 right-12 w-6 h-6 bg-white opacity-15 rounded-full"></div>
             
             <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-6"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
@@ -414,7 +381,7 @@ const Clients = ({ t, lang }) => {
               {t('joinFamily')}
             </motion.h2>
             <motion.p 
-              className="text-blue-100 text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
+              className="text-blue-100 text-lg md:text-xl mb-6 md:mb-10 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.3 }}
@@ -423,14 +390,14 @@ const Clients = ({ t, lang }) => {
             </motion.p>
             <motion.button 
               onClick={goToContact}
-              className="bg-white text-blue-600 px-12 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl hover:shadow-3xl cursor-pointer"
+              className="bg-white text-blue-600 px-8 md:px-12 py-3 md:py-4 rounded-2xl font-bold text-base md:text-lg hover:bg-blue-50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl hover:shadow-3xl cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.4 }}
             >
-              {t('startProjectToday')} <ArrowRight className="inline ml-2 w-5 h-5" />
+              {t('startProjectToday')} <ArrowRight className="inline ml-2 w-4 h-4 md:w-5 md:h-5" />
             </motion.button>
           </div>
         </div>

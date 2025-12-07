@@ -2,3 +2,33 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar (optional - premium touch) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EAF6FF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3EA6FF;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a8fd9;
+}

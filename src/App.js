@@ -9,8 +9,7 @@ import { Hero } from "./components/Hero";
 import { Services } from "./components/Services";
 import { WhyChooseUs } from "./components/WhyChooseUs";
 import { Stats } from "./components/Stats";
-import { CaseStudies } from "./components/CaseStudies";
-import { Testimonials } from "./components/Testimonials";
+import OurTeam from './components/Testimonials';
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { QuoteModal } from "./components/QuoteModal";
@@ -97,9 +96,9 @@ const SaturnLynkWebsite = () => {
 
                 <Stats t={t} lang={lang} />
 
-                <CaseStudies t={t} lang={lang} />
-
-                <Testimonials t={t} lang={lang} />
+                <div id="ourteam">
+                  <OurTeam t={t} lang={lang} />
+                </div>
 
                 <Contact
                   setShowQuoteForm={setShowQuoteForm}
@@ -121,8 +120,6 @@ const SaturnLynkWebsite = () => {
           {/* CLIENTS PAGE */}
           <Route
             path="/clients"
-            showQuoteForm={showQuoteForm}
-            setShowQuoteForm={setShowQuoteForm}
             element={<Clients t={t} lang={lang} />}
           />
         <Route path="/all-services" element={<AllServices t={t} lang={lang} />} />
