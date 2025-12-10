@@ -45,33 +45,74 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setGlobalMessage({ type: '', text: '' });
-    setErrors({});
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setGlobalMessage({ type: '', text: '' });
+  setErrors({});
 
-    const formData = new FormData(e.target);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      message: formData.get('message'),
-    };
+  const formData = new FormData(e.target);
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    phone: formData.get('phone'),
+    message: formData.get('message'),
+  };
 
-    if (!validateForm(data)) {
-      setLoading(false);
-      return;
+  if (!validateForm(data)) {
+    setLoading(false);
+    return;
+  }
+
+  // Use full backend URL - SAME AS QuoteModal.js
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+  try {
+    const response = await fetch(`${API_URL}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log('Response status:', response.status); // Add for debugging
+
+    if (!response.ok) {
+      // Try to parse error message
+      let errorMsg = 'Failed to send message';
+      try {
+        const errorData = await response.json();
+        errorMsg = errorData.error || errorMsg;
+      } catch (e) {
+        // If response is not JSON, get text
+        const text = await response.text();
+        console.error('Non-JSON response:', text.substring(0, 100));
+        errorMsg = `Server error: ${response.status}`;
+      }
+      throw new Error(errorMsg);
     }
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setGlobalMessage({ type: 'success', text: t('messageSent') || 'Message sent successfully!' });
+    const result = await response.json();
+    console.log('Success response:', result); // Add for debugging
+
+    setGlobalMessage({ 
+      type: 'success', 
+      text: t('messageSent') || 'Message sent successfully!' 
+    });
     e.target.reset();
     setErrors({});
+    
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    setGlobalMessage({ 
+      type: 'error', 
+      text: error.message || t('sendError') || 'Failed to send message. Please try again.' 
+    });
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   const getInputClass = (field) => {
     const baseClass = "w-full p-4 border-2 rounded-2xl focus:outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm";
@@ -241,7 +282,8 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                   type="text" 
                   name="name"
                   placeholder={t('yourName') || 'Your Name'}
-                  className={getInputClass('name')}
+                  className={`${getInputClass('name')} ${lang === 'ar' ? 'text-right placeholder:text-right' : 'text-left placeholder:text-left'}`}
+                  dir={lang === 'ar' ? 'rtl' : 'ltr'}
                   onFocus={() => setFocusedField('name')}
                   onBlur={() => setFocusedField(null)}
                   whileFocus={{ scale: 1.02 }}
@@ -251,6 +293,7 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                     className="mt-2 text-sm text-red-600 flex items-center gap-1"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
+                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
                   >
                     ⚠ {errors.name}
                   </motion.p>
@@ -263,8 +306,8 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                   type="email" 
                   name="email"
                   placeholder={t('yourEmail') || 'Your Email'}
-                  className={`${getInputClass('email')} ${lang === 'ar' ? 'text-left' : ''}`}
-                  dir={lang === 'ar' ? 'ltr' : undefined}
+                  className={`${getInputClass('email')} ${lang === 'ar' ? 'text-right placeholder:text-right' : 'text-left placeholder:text-left'}`}
+                  dir="ltr" // Force LTR for email input but align text to right in Arabic
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
                   whileFocus={{ scale: 1.02 }}
@@ -274,6 +317,7 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                     className="mt-2 text-sm text-red-600 flex items-center gap-1"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
+                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
                   >
                     ⚠ {errors.email}
                   </motion.p>
@@ -285,9 +329,9 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                 <motion.input 
                   type="tel" 
                   name="phone"
-                  placeholder={`${t('yourPhone')} ${t('phoneOptional')}`}
-                  className={`${getInputClass('phone')} ${lang === 'ar' ? 'text-left' : ''}`}
-                  dir={lang === 'ar' ? 'ltr' : undefined}
+                  placeholder={t('yourPhone') || 'Your Phone'}
+                  className={`${getInputClass('phone')} ${lang === 'ar' ? 'text-right placeholder:text-right' : 'text-left placeholder:text-left'}`}
+                  dir="ltr" // Force LTR for phone input but align text to right in Arabic
                   onFocus={() => setFocusedField('phone')}
                   onBlur={() => setFocusedField(null)}
                   whileFocus={{ scale: 1.02 }}
@@ -297,9 +341,15 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                     className="mt-2 text-sm text-red-600 flex items-center gap-1"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
+                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
                   >
                     ⚠ {errors.phone}
                   </motion.p>
+                )}
+                {!errors.phone && (
+                  <p className={`mt-2 text-sm text-gray-500 ${lang === 'ar' ? 'text-right' : 'text-left'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                    {t('phoneOptional') || '(Optional)'}
+                  </p>
                 )}
               </div>
 
@@ -309,7 +359,8 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                   name="message"
                   placeholder={t('yourMessage') || 'Your Message'}
                   rows={5} 
-                  className={getInputClass('message')}
+                  className={`${getInputClass('message')} ${lang === 'ar' ? 'text-right placeholder:text-right' : 'text-left placeholder:text-left'}`}
+                  dir={lang === 'ar' ? 'rtl' : 'ltr'}
                   onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
                   whileFocus={{ scale: 1.02 }}
@@ -319,6 +370,7 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                     className="mt-2 text-sm text-red-600 flex items-center gap-1"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
+                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
                   >
                     ⚠ {errors.message}
                   </motion.p>
@@ -335,6 +387,7 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                   }`}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  dir={lang === 'ar' ? 'rtl' : 'ltr'}
                 >
                   {globalMessage.type === 'success' && <CheckCircle className="w-5 h-5" />}
                   {globalMessage.text}
@@ -355,7 +408,7 @@ export const Contact = ({ setShowQuoteForm, t, lang = 'en' }) => {
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}
                 />
-                <span className="relative z-10 flex items-center justify-center gap-3">
+                <span className="relative z-10 flex items-center justify-center gap-3" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
                   {loading ? (
                     <>
                       <motion.div

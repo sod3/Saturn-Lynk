@@ -121,7 +121,7 @@ export const Services = ({ scrollToSection, t, lang = "en" }) => {
             >
               <Zap className="w-5 h-5 text-[#3EA6FF]" />
             </motion.div>
-            <span className="font-bold text-[#3EA6FF]">Our Services</span>
+            <span className="font-bold text-[#3EA6FF]">{t('ourServices')}</span>
             <Sparkles className="w-4 h-4 text-[#3EA6FF]" />
           </motion.div>
 
@@ -132,7 +132,7 @@ export const Services = ({ scrollToSection, t, lang = "en" }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <TypingText text="What We Offer" />
+            <TypingText text={lang === 'en' ? "What We Offer" : "ما نقدمه"} />
           </motion.h2>
 
           {/* Description */}
@@ -142,11 +142,11 @@ export const Services = ({ scrollToSection, t, lang = "en" }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Comprehensive digital solutions that elevate your business to the next level.
+            {t('servicesDesc')}
           </motion.p>
         </motion.div>
 
-        {/* GRID */}
+        {/* GRID - Fixed to ensure equal height */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {displayedServices.map((service, idx) => (
             <EnhancedCard
@@ -164,7 +164,7 @@ export const Services = ({ scrollToSection, t, lang = "en" }) => {
 };
 
 /* ==============================
-   UPGRADED 3D CARD COMPONENT
+   UPDATED CARD COMPONENT WITH EQUAL HEIGHT
    ============================== */
 const EnhancedCard = ({ service, idx, handleLearnMore, lang }) => {
   const [hover, setHover] = useState(false);
@@ -182,7 +182,7 @@ const EnhancedCard = ({ service, idx, handleLearnMore, lang }) => {
 
   return (
     <motion.div
-      className="relative group"
+      className="relative group h-full" // Added h-full here
       onMouseMove={handleMouse}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
@@ -202,34 +202,39 @@ const EnhancedCard = ({ service, idx, handleLearnMore, lang }) => {
         transition={{ duration: 0.4 }}
       />
 
-      {/* Card */}
+      {/* Card - Added flex flex-col h-full */}
       <motion.div
-        className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 border border-[#CFE8FF]/50 shadow-xl"
+        className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 border border-[#CFE8FF]/50 shadow-xl h-full flex flex-col"
         whileHover={{ y: -10, scale: 1.03 }}
         transition={{ duration: 0.4 }}
       >
         {/* Icon */}
         <motion.div
-          className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.gradient} text-4xl flex items-center justify-center shadow-xl mb-6`}
+          className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.gradient} text-4xl flex items-center justify-center shadow-xl mb-6 flex-shrink-0`}
           animate={hover ? { rotateY: 360, scale: 1.15 } : { rotateY: 0, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
           {service.icon}
         </motion.div>
 
-        <h3 className="text-2xl font-bold mb-3 group-hover:text-[#3EA6FF] transition">
+        {/* Title - Fixed height */}
+        <h3 className="text-2xl font-bold mb-3 group-hover:text-[#3EA6FF] transition min-h-[3.5rem] flex items-center">
           {service.title[lang]}
         </h3>
 
-        <p className="text-gray-600 mb-6 leading-relaxed">{service.description[lang]}</p>
+        {/* Description - Flex-grow to take available space */}
+        <p className="text-gray-600 mb-6 leading-relaxed flex-grow line-clamp-3">
+          {service.description[lang]}
+        </p>
 
-        {/* Button */}
+        {/* Button - Sticks to bottom */}
         <motion.button
           onClick={() => handleLearnMore(idx)}
-          className="flex items-center gap-3 text-[#3EA6FF] font-bold"
+          className="flex items-center gap-3 text-[#3EA6FF] font-bold mt-auto"
           whileHover={{ x: lang === "ar" ? -8 : 8 }}
         >
-          Learn More <ArrowRight />
+          {lang === "en" ? "Learn More" : "المزيد"} 
+          <ArrowRight className={lang === "ar" ? "rotate-180" : ""} />
         </motion.button>
       </motion.div>
     </motion.div>

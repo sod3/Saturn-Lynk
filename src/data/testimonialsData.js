@@ -2,7 +2,7 @@ export const testimonials = [
   { 
     name: "Ahmed Al-Rashid", 
     role: { en: "IT Director", ar: "مدير تقنية المعلومات" }, 
-    text: { en: "Saturn Lynk revolutionized...", ar: "غيّر ساتورن لينك بنيتنا التحتية..." } 
+    text: { en: "Saturn Lynk revolutionized...", ar: "غيّر ساترن لينك بنيتنا التحتية..." } 
   },
   { 
     name: "Sarah Mohammed", 

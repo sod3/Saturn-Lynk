@@ -83,11 +83,11 @@ export const Navbar = ({
           {/* LOGO → GO HOME */}
           <button onClick={goHome} className="flex items-center gap-2 group cursor-pointer">
             <motion.div
-              className="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-300 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg"
+              className="w-12 h-12 bg-gradient-to-br rounded-xl flex items-center justify-center group-hover:shadow-lg"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3 }}
             >
-              <img className="w-10 h-10" src="/logo.webp" alt="Saturn Lynk Logo" />
+              <img className="w-12 h-12" src="/logo1.png" alt="Saturn Lynk Logo" />
             </motion.div>
           </button>
 

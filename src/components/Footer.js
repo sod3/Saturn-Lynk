@@ -21,12 +21,23 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
 
+  // Arabic translations for page links
+  const getPageLabel = (page) => {
+    const translations = {
+      'Home': { en: 'Home', ar: 'الرئيسية' },
+      'Services': { en: 'Services', ar: 'خدماتنا' },
+      'Why Us': { en: 'Why Us', ar: 'لماذا نحن' },
+      'Contact': { en: 'Contact', ar: 'تواصل معنا' }
+    };
+    return translations[page]?.[lang] || page;
+  };
+
   const footerLinks = {
     company: [
-      { label: 'Home', action: () => scrollToSection('home') },
-      { label: 'Services', action: () => scrollToSection('services') },
-      { label: 'Why Us', action: () => scrollToSection('whyus') },
-      { label: 'Contact', action: () => scrollToSection('contact') }
+      { label: getPageLabel('Home'), action: () => scrollToSection('home') },
+      { label: getPageLabel('Services'), action: () => scrollToSection('services') },
+      { label: getPageLabel('Why Us'), action: () => scrollToSection('whyus') },
+      { label: getPageLabel('Contact'), action: () => scrollToSection('contact') }
     ],
     social: [
       { icon: Facebook, label: 'Facebook', href: '#' },
@@ -36,6 +47,7 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
     ]
   };
 
+  // Arabic translations for working hours and office info
   const workingHours = {
     weekdays: rtl ? "الإثنين إلى الخميس" : "Monday to Thursday",
     offdays: rtl ? "الجمعة والسبت: إجازة" : "Friday and Saturday: Off"
@@ -43,6 +55,17 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
 
   const officeInfo = {
     address: rtl ? "مبنى إعمار-سي 2899، حي الفيحاء، جدة 22241" : "Emaar Building-C 2899, Al Faiha District, Jeddah 22241"
+  };
+
+  // Arabic translations for headings
+  const getHeading = (key) => {
+    const headings = {
+      'Company': { en: 'Company', ar: 'الشركة' },
+      'Working Hours': { en: 'Working Hours', ar: 'ساعات العمل' },
+      'Our Office': { en: 'Our Office', ar: 'مكتبنا' },
+      'Connect With Us': { en: 'Connect With Us', ar: 'تواصل معنا' }
+    };
+    return headings[key]?.[lang] || key;
   };
 
   return (
@@ -135,7 +158,7 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
             transition={{ delay: 0.1, duration: 0.7 }}
           >
             <h4 className="text-white text-lg font-bold mb-6">
-              {rtl ? "الشركة" : "Company"}
+              {getHeading('Company')}
             </h4>
 
             <ul className="space-y-3">
@@ -160,7 +183,7 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
           >
             <h4 className="text-white text-lg font-bold mb-6 flex items-center gap-2">
               <Clock className="w-5 h-5" />
-              {rtl ? "ساعات العمل" : "Working Hours"}
+              {getHeading('Working Hours')}
             </h4>
             
             <ul className="space-y-4">
@@ -188,7 +211,7 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
           >
             <h4 className="text-white text-lg font-bold mb-6 flex items-center gap-2">
               <Building className="w-5 h-5" />
-              {rtl ? "مكتبنا" : "Our Office"}
+              {getHeading('Our Office')}
             </h4>
             
             <div className="space-y-4">
@@ -201,7 +224,7 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
               
               <div className="pt-2">
                 <h5 className="text-white text-sm font-semibold mb-3">
-                  {rtl ? "تواصل معنا" : "Connect With Us"}
+                  {getHeading('Connect With Us')}
                 </h5>
                 
                 <div className="flex gap-3 mb-6">
