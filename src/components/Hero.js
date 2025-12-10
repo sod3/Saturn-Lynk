@@ -184,7 +184,7 @@ export const Hero = ({ setShowQuoteForm, scrollToSection, t, lang }) => {
   initial={{ opacity: 0, x: 20 }}
   animate={{ opacity: 1, x: 0 }}
   transition={{ delay: 1.4, duration: 0.6 }}
-  style={{ x: 170, y: 20 }} // branch position (right side)
+  style={{ x: 170, y: 170 }} // branch position (right side)
   onClick={() => (window.location.href = "/all-services")}
   whileHover={{
     scale: 1.15,
@@ -194,7 +194,7 @@ export const Hero = ({ setShowQuoteForm, scrollToSection, t, lang }) => {
 >
   {/* Branch line */}
   <motion.div
-    className="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+    className="w-12 h-1 rounded-full"
     animate={{ width: [40, 55, 40] }}
     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
   />
