@@ -4,7 +4,6 @@ export const translations = {
     nav: ['Home', 'Services', 'Why Us', 'Our Team', 'Contact'],
     freeConsultation: 'Free Consultation',
     clients: 'Our Clients', // Added clients key
-
     // Hero
     trustedBy: 'Trusted by Leading Saudi Enterprises',
     heroTitle: 'Empowering Saudi Visions with ',
@@ -12,7 +11,6 @@ export const translations = {
     heroDesc: 'Unlock ultra-reliable, scalable network solutions tailored for the Kingdom\'s ambitious digital future.',
     startProject: 'Start Your Project',
     discoverServices: 'Discover Services',
-
     // Services
     ourServices: 'Our Premium Services',
     servicesTitle: 'Tailored Solutions for Saudi Excellence',
@@ -22,7 +20,6 @@ export const translations = {
     allServices: "All Services",
     allServicesTitle: "Explore All Our Services",
     allServicesDesc: "Discover our complete range of professional services designed to help your business grow and succeed.",
-
     // Why Us
     whyChoose: 'Why Choose Saturn Lynk',
     whyTitle: 'Your Partner in Saudi Digital Success',
@@ -33,7 +30,6 @@ export const translations = {
       { title: "24/7 Premium Support", desc: "Dedicated assistance ensuring zero downtime." },
       { title: "Future-Proof Innovation", desc: "AI-integrated systems for long-term growth." }
     ],
-
     // Stats
     stats: [
       { number: "500+", label: "Projects Delivered" },
@@ -41,13 +37,11 @@ export const translations = {
       { number: "24/7", label: "Support Availability" },
       { number: "15+", label: "Years of Expertise" },
     ],
-
     // Case Studies
     caseStudies: 'Case Studies',
     caseTitle: 'Proven Success Stories',
     caseDesc: 'See how we\'ve transformed businesses in the Kingdom.',
     viewDetails: 'View Details',
-
     // Our Team
     ourTeam: 'Our Team',
     teamTitle: 'Meet the People Behind Our Success',
@@ -57,16 +51,15 @@ export const translations = {
         name: "General Manager",
         role: "Message from General Manager",
         message:
-          "At Saturn Lynk Technologies, we are committed to delivering reliable, innovative, and efficient IT solutions that meet the evolving needs of our clients. Our focus is on maintaining high-quality standards, ensuring timely delivery, and providing exceptional customer support.  We believe in building long-term relationships based on trust, transparency, and excellence. As we continue to grow, our priority remains the same to empower businesses with technology that drives success. Thank you for choosing Saturn Lynk Technologies.",
+          "At Saturn Lynk Technologies, we are committed to delivering reliable, innovative, and efficient IT solutions that meet the evolving needs of our clients. Our focus is on maintaining high-quality standards, ensuring timely delivery, and providing exceptional customer support. We believe in building long-term relationships based on trust, transparency, and excellence. As we continue to grow, our priority remains the same to empower businesses with technology that drives success. Thank you for choosing Saturn Lynk Technologies.",
       },
       {
         name: "Country Sales Manager",
         role: "Message from Country Sales Manager",
         message:
-          "At Saturn Lynk Technologies, our goal is to deliver the highest level of value and service to clients across the Kingdom. We strive to understand our customers’ needs and provide tailored IT solutions that support their growth and success.  With a strong focus on responsiveness, quality, and long-term partnerships, our sales team is dedicated to ensuring that every client receives exceptional support from the first inquiry to project completion and beyond.  We look forward to serving you and helping your business achieve its full potential."
+          "At Saturn Lynk Technologies, our goal is to deliver the highest level of value and service to clients across the Kingdom. We strive to understand our customers’ needs and provide tailored IT solutions that support their growth and success. With a strong focus on responsiveness, quality, and long-term partnerships, our sales team is dedicated to ensuring that every client receives exceptional support from the first inquiry to project completion and beyond. We look forward to serving you and helping your business achieve its full potential."
       },
     ],
-
     // Contact
     getInTouch: 'Get in Touch',
     buildFuture: "Let's Build Your Future",
@@ -94,7 +87,6 @@ export const translations = {
     errorMessageTooShort: 'Message should be at least 10 characters long.',
     errorServiceRequired: 'Please select a service.',
     errorDetailsTooShort: 'Project details should be at least 10 characters long.',
-
     // Footer
     footerDesc: "Futuristic connectivity for Saudi's digital era.",
     links: 'Links',
@@ -103,20 +95,17 @@ export const translations = {
     networkInfra: 'Network Infrastructure',
     fiberOptics: 'Fiber Optic Solutions',
     copyright: '© 2025 Saturn Lynk. All rights reserved.',
-
     // Quote Modal
     quoteTitle: 'Free Consultation',
     selectService: 'Select Service',
     projectDetails: 'Project Details',
     submit: 'Submit',
-
     // Chatbot
     liveSupport: 'Live Support',
     howAssist: 'How can we assist you today?',
     requestQuote: 'Request Quote',
     viewServices: 'View Services',
     chatOnWA: 'Chat on WhatsApp',
-
     // Clients Page - New Translations
     valuedClients: 'Our Valued Clients',
     clientsSubtitle: 'Trusted by businesses worldwide. Discover what our clients have to say about their experience working with us.',
@@ -131,13 +120,18 @@ export const translations = {
     support: 'Support',
     project: 'Project',
     at: 'at',
+    // New keys for ServiceDetail
+    serviceNotFound: 'Service Not Found',
+    serviceOverview: 'Service Overview',
+    keyFeatures: 'Key Features',
+    benefits: 'Benefits',
+    getStarted: 'Get Started',
   },
   ar: {
     // Navbar
     nav: ['الرئيسية', 'الخدمات', 'لماذا نحن', 'فريقنا', 'تواصل معنا'],
     freeConsultation: 'استشارة مجانية',
     clients: 'عملاؤنا', // Added clients key
-
     // Hero
     trustedBy: 'موثوق به من قبل الشركات السعودية الرائدة',
     heroTitle: 'تمكين الرؤى السعودية بـ ',
@@ -145,7 +139,6 @@ export const translations = {
     heroDesc: 'اكتشف حلول شبكات فائقة الموثوقية وقابلة للتوسع مصممة لرؤية المملكة الطموحة.',
     startProject: 'ابدأ مشروعك',
     discoverServices: 'اكتشف خدماتنا',
-
     // Services
     ourServices: 'خدماتنا المتميزة',
     servicesTitle: 'حلول مخصصة للتميز السعودي',
@@ -155,7 +148,6 @@ export const translations = {
     allServices: "جميع الخدمات",
     allServicesTitle: "استكشف كل خدماتنا",
     allServicesDesc: "اكتشف مجموعتنا الكاملة من الخدمات الاحترافية المصممة لمساعدة أعمالك على النمو والنجاح.",
-
     // Why Us
     whyChoose: 'لماذا تختار ساترن لينك',
     whyTitle: 'شريكك في النجاح الرقمي السعودي',
@@ -166,7 +158,6 @@ export const translations = {
       { title: "دعم متميز 24/7", desc: "مساعدة مخصصة لضمان عدم التوقف." },
       { title: "ابتكار مستقبلي", desc: "أنظمة مدعومة بالذكاء الاصطناعي للنمو طويل الأمد." }
     ],
-
     // Stats
     stats: [
       { number: "500+", label: "مشاريع تم تسليمها" },
@@ -174,13 +165,11 @@ export const translations = {
       { number: "24/7", label: "توفر الدعم" },
       { number: "15+", label: "سنوات من الخبرة" },
     ],
-
     // Case Studies
     caseStudies: 'دراسات الحالة',
     caseTitle: 'قصص نجاح مثبتة',
     caseDesc: 'شاهد كيف غيرنا أعمال الشركات في المملكة.',
     viewDetails: 'عرض التفاصيل',
-
     // Our Team
     ourTeam: 'فريقنا',
     teamTitle: 'تعرف على الأشخاص وراء نجاحنا',
@@ -199,7 +188,6 @@ export const translations = {
           "في شركة ساترن لينك تكنولوجيز، هدفنا هو تقديم أعلى مستوى من القيمة والخدمة لعملائنا عبر المملكة. نسعى لفهم احتياجات عملائنا وتقديم حلول تقنية معلومات مخصصة تدعم نموهم ونجاحهم. مع تركيز قوي على الاستجابة والجودة والشراكات طويلة الأمد، فريق المبيعات لدينا ملتزم بضمان أن يحصل كل عميل على دعم استثنائي من الاستفسار الأول إلى إكمال المشروع وما بعده. نتطلع إلى خدمتكم ومساعدة أعمالكم على تحقيق إمكانياتها الكاملة.",
       },
     ],
-
     // Contact
     getInTouch: 'تواصل معنا',
     buildFuture: 'لنبني مستقبلك',
@@ -227,7 +215,6 @@ export const translations = {
     errorMessageTooShort: 'يجب أن تكون الرسالة 10 أحرف على الأقل.',
     errorServiceRequired: 'يرجى اختيار خدمة.',
     errorDetailsTooShort: 'يجب أن تكون تفاصيل المشروع 10 أحرف على الأقل.',
-
     // Footer
     footerDesc: 'اتصال مستقبلي لعصر المملكة الرقمي.',
     links: 'روابط',
@@ -236,20 +223,17 @@ export const translations = {
     networkInfra: 'البنية التحتية للشبكات',
     fiberOptics: 'حلول الألياف البصرية',
     copyright: '© 2025 ساترن لينك. جميع الحقوق محفوظة.',
-
     // Quote Modal
     quoteTitle: 'استشارة مجانية',
     selectService: 'اختر الخدمة',
     projectDetails: 'تفاصيل المشروع',
     submit: 'إرسال',
-
     // Chatbot
     liveSupport: 'الدعم المباشر',
     howAssist: 'كيف يمكننا مساعدتك اليوم؟',
     requestQuote: 'طلب عرض أسعار',
     viewServices: 'عرض الخدمات',
     chatOnWA: 'الدردشة على واتساب',
-
     // Clients Page - New Translations
     valuedClients: 'عملاؤنا الكرام',
     clientsSubtitle: 'موثوق به من قبل الشركات حول العالم. اكتشف ما يقوله عملاؤنا عن تجربتهم في العمل معنا.',
@@ -264,5 +248,11 @@ export const translations = {
     support: 'الدعم',
     project: 'المشروع',
     at: 'في',
+    // New keys for ServiceDetail
+    serviceNotFound: 'الخدمة غير موجودة',
+    serviceOverview: 'نظرة عامة على الخدمة',
+    keyFeatures: 'الميزات الرئيسية',
+    benefits: 'الفوائد',
+    getStarted: 'ابدأ الآن',
   }
 };

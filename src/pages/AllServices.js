@@ -55,7 +55,7 @@ const handleLearnMore = (id) => {
           </motion.span>
 
           <motion.h1
-            className="text-5xl sm:text-6xl font-extrabold mt-6 mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent"
+            className="text-5xl sm:text-6xl mt-6 mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent "
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

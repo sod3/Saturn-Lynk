@@ -127,7 +127,7 @@ const Clients = ({ t, lang }) => {
           </div>
         </motion.div>
         
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-900 to-cyan-700 bg-clip-text text-transparent mb-6 leading-tight">
+        <h1 className="text-5xl bg-gradient-to-r from-blue-900 to-cyan-700 bg-clip-text text-transparent mb-6 leading-tight">
           {t('valuedClients')}
         </h1>
         <p className="text-xl md:text-2xl text-blue-700 max-w-3xl mx-auto leading-relaxed font-light">
@@ -200,7 +200,6 @@ const Clients = ({ t, lang }) => {
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-900 to-cyan-700 bg-clip-text text-transparent mb-3">
                   {t('clientTestimonials')}
                 </h2>
-                <p className="text-blue-600 text-sm md:text-lg">{t('hearDesc')}</p>
               </div>
               <div className={`flex items-center space-x-3 ${lang === 'ar' ? 'space-x-reverse' : ''}`}>
                 <motion.button

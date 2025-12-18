@@ -49,7 +49,7 @@ export const Footer = ({ scrollToSection, t, lang = 'en' }) => {
 
   // Arabic translations for working hours and office info
   const workingHours = {
-    weekdays: rtl ? "الإثنين إلى الخميس" : "Monday to Thursday",
+    weekdays: rtl ? "الأحد إلى الخميس: ٨ صباحًا إلى ٦ مساءً" : "Sunday to Thursday: 8am to 6pm",
     offdays: rtl ? "الجمعة والسبت: إجازة" : "Friday and Saturday: Off"
   };
 

@@ -1,34 +1,49 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { services } from "../data/servicesData";
 import { ArrowRight, Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-
 const ServiceDetail = ({ t, lang }) => {
   const { id } = useParams();
   const service = services[id];
-
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   if (!service)
     return (
       <div className="p-10 text-center text-xl text-gray-700">
-        Service Not Found
+        {t("serviceNotFound")}
       </div>
     );
-
   const togglePlay = () => {
     if (!videoRef.current) return;
     isPlaying ? videoRef.current.pause() : videoRef.current.play();
     setIsPlaying(!isPlaying);
   };
-
   const toggleMute = () => {
     if (!videoRef.current) return;
     videoRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
+  };
+
+  const handleGetStarted = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById("contact");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 200);
+    } else {
+      const element = document.getElementById("contact");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
 
   return (
@@ -47,17 +62,15 @@ const ServiceDetail = ({ t, lang }) => {
         >
           {service.icon}
         </div>
-
         <div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
             {service.title[lang]}
           </h1>
           <p className="text-gray-500 mt-1 text-base sm:text-lg">
-            {t("Service Overview")}
+            {t("serviceOverview")}
           </p>
         </div>
       </motion.div>
-
       {/* DESCRIPTION */}
       <motion.p
         className="text-gray-700 text-lg leading-relaxed mb-12 bg-gray-50 p-6 rounded-2xl shadow-sm border border-gray-100"
@@ -66,7 +79,6 @@ const ServiceDetail = ({ t, lang }) => {
       >
         {service.detailedDescription?.[lang] || service.description[lang]}
       </motion.p>
-
       {/* VIDEO SECTION */}
       {service.video && (
         <motion.div
@@ -82,7 +94,6 @@ const ServiceDetail = ({ t, lang }) => {
           >
             <source src={service.video} type="video/mp4" />
           </video>
-
           <div className="absolute bottom-4 left-4 flex items-center gap-4 bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg text-white">
             <button
               onClick={togglePlay}
@@ -90,7 +101,6 @@ const ServiceDetail = ({ t, lang }) => {
             >
               {isPlaying ? <Pause size={22} /> : <Play size={22} />}
             </button>
-
             <button
               onClick={toggleMute}
               className="hover:scale-110 transition-transform"
@@ -100,7 +110,6 @@ const ServiceDetail = ({ t, lang }) => {
           </div>
         </motion.div>
       )}
-
       {/* FEATURES */}
       {service.features && (
         <motion.div
@@ -109,7 +118,7 @@ const ServiceDetail = ({ t, lang }) => {
           animate={{ opacity: 1, y: 0 }}
         >
           <h2 className="text-3xl font-bold text-gray-900 mb-5">
-            {t("Key Features")}
+            {t("keyFeatures")}
           </h2>
           <ul className="grid sm:grid-cols-2 gap-4">
             {service.features[lang].map((f, i) => (
@@ -123,7 +132,6 @@ const ServiceDetail = ({ t, lang }) => {
           </ul>
         </motion.div>
       )}
-
       {/* BENEFITS */}
       {service.benefits && (
         <motion.div
@@ -132,7 +140,7 @@ const ServiceDetail = ({ t, lang }) => {
           animate={{ opacity: 1, y: 0 }}
         >
           <h2 className="text-3xl font-bold text-gray-900 mb-5">
-            {t("Benefits")}
+            {t("benefits")}
           </h2>
           <ul className="grid sm:grid-cols-2 gap-4">
             {service.benefits[lang].map((b, i) => (
@@ -146,18 +154,16 @@ const ServiceDetail = ({ t, lang }) => {
           </ul>
         </motion.div>
       )}
-
       {/* CTA */}
-      <motion.a
-        href="#contact"
+      <motion.button
+        onClick={handleGetStarted}
         className="inline-flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        {t("Get Started")} <ArrowRight />
-      </motion.a>
+        {t("getStarted")} <ArrowRight />
+      </motion.button>
     </div>
   );
 };
-
 export default ServiceDetail;
